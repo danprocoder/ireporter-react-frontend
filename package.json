@@ -1,0 +1,51 @@
+{
+  "name": "ireporter-react",
+  "version": "1.0.0",
+  "description": "A platform where users can report cases of corruption or things that need government intervention",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danprocoder/ireporter-react.git"
+  },
+  "keywords": [
+    "ireporter",
+    "corruption",
+    "intervention",
+    "nigeria",
+    "report",
+    "government"
+  ],
+  "author": "Daniel Austin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danprocoder/ireporter-react/issues"
+  },
+  "homepage": "https://github.com/danprocoder/ireporter-react#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "dependencies": {
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
+  }
+}
