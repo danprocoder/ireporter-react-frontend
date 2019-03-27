@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve('dist'),
-    filename: 'app.js'
+    filename: 'app.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -21,6 +22,9 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   },
   plugins: [
     new htmlWebpackPlugin({
