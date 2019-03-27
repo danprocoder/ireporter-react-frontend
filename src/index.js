@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Ireporter extends React.Component {
-  render() {
-    return <div>Welcome to iReporter</div>;
+  render( )
+  
+  {
+    return <div>Welcome to iReporter</div>
+    ;
   }
 }
 
