@@ -1,5 +1,8 @@
+# Node modules
 ./node_modules
 
+# Package lock
 ./package-lock.json
 
+# Webpack output folder
 ./dist
