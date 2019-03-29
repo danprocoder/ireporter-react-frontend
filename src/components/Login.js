@@ -45,7 +45,7 @@ class Login extends Component {
         const data = response.data.data[0];
         localStorage.setItem('authToken', data.token);
 
-        window.location = '/dashboard';
+        window.location = (data.user.isAdmin ? '/admin' : '/dashboard');
       })
       .catch((error) => {
         const state = this.state;
@@ -89,4 +89,4 @@ class Login extends Component {
   }
 }
 
-export default connect(state => state)(Login);
+export default connect()(Login);

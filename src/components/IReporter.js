@@ -10,10 +10,6 @@ import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
 class IReporter extends React.Component {
-  componentDidUpdate(nextProps, nextState) {
-    console.log(nextProps);
-  }
-
   render() {
     return (
       <BrowserRouter>
