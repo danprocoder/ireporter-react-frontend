@@ -6,3 +6,5 @@ package-lock.json
 
 # Webpack output folder
 dist
+
+.DS_Store

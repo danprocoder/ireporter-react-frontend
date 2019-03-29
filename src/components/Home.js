@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import template from './templates/home.jsx';
+import '../../assets/css/home.css';
 
 class Home extends Component {
   render() {
-    return <div>This is the homepage.</div>;
+    return template;
   }
 }
 
