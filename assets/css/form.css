@@ -1,0 +1,53 @@
+form label {
+    font-weight: 700;
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+form .error {
+    color: red;
+    font-size: 11px;
+    margin-top: 5px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.required {
+    font-weight: normal;
+    color: #f00;
+}
+
+.text-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #dcdcdc;
+    color: #7f7f7f;
+    outline: none;
+    transition: border-color 0.16s ease-in;
+}
+
+.text-field:focus {
+    border-color: #9f9f9f;
+    color: #333;
+}
+
+form .field-section {
+    margin-top: 20px;
+}
+
+form .form-section {
+    margin-top: 30px;
+}
+
+form .form-section .form-section-header {
+    color: #9a9a9a;
+    font-size: 22px;
+}
+
+form .form-section .form-section-body {
+    margin-top: 20px;
+}

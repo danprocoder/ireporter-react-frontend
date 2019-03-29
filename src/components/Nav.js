@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import AdminNav from './AdminNav';
 import UserNav from './UserNav';
 import DefaultNav from './DefaultNav';
 
 class Nav extends Component {
   render() {
-    return !true ? (
-        '' == 'admin' ? <AdminNav /> : <UserNav />
-      ) : (
-        <DefaultNav />
-      );
+    return this.props.isLoggedIn ? (
+      this.props.user.isAdmin ? <AdminNav /> : <UserNav />
+    ) : (
+      <DefaultNav />
+    );
   }
 }
 
-export default Nav;
+Nav.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
+
+const stateToProps = (state) => {
+  const reducer = state.usersReducer;
+
+  const isLoggedIn = typeof reducer.user == 'object';
+  return {
+    isLoggedIn,
+    user: isLoggedIn ? reducer.user : null
+  };
+};
+
+export default connect(stateToProps)(Nav);
