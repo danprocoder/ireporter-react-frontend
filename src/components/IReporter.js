@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
@@ -18,6 +20,7 @@ class IReporter extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
 
+            <Route path="/dashboard" />
             <Route path="/(red-flag|intervention)/new" />
             <Route path="/(red-flag|intervention)s" />
             <Route path="/(red-flag|intervention)/edit/:id" />
@@ -38,4 +41,16 @@ class IReporter extends React.Component {
   }
 }
 
-export default IReporter;
+IReporter.propTypes = {
+  user: PropTypes.array
+};
+
+const stateToProps = (state) => {
+  const isLoggedIn = typeof state.user == 'object';
+  return {
+    isLoggedIn,
+    user: isLoggedIn ? state.user : null
+  };
+};
+
+export default connect(stateToProps)(IReporter);
