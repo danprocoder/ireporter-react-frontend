@@ -25,7 +25,7 @@ const stateToProps = (state) => {
   const isLoggedIn = typeof reducer.user == 'object';
   return {
     isLoggedIn,
-    user: isLoggedIn ? reducer.user : null
+    user: isLoggedIn ? reducer.user.data : null
   };
 };
 

@@ -6,6 +6,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
+import AdminDashboard from './admin/Dashboard';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
@@ -28,7 +29,7 @@ class IReporter extends React.Component {
             <Route path="/profile" />
 
             {/* Admin routes. */}
-            <Route path="/admin" />
+            <Route path="/admin" component={AdminDashboard} />
             <Route path="/admin/(red-flag|intervention)s" />
             <Route path="/admin/(red-flag|intervention)/:id" />
             <Route path="/admin/users" />
@@ -41,16 +42,4 @@ class IReporter extends React.Component {
   }
 }
 
-IReporter.propTypes = {
-  user: PropTypes.array
-};
-
-const stateToProps = (state) => {
-  const isLoggedIn = typeof state.user == 'object';
-  return {
-    isLoggedIn,
-    user: isLoggedIn ? state.user : null
-  };
-};
-
-export default connect(stateToProps)(IReporter);
+export default connect()(IReporter);

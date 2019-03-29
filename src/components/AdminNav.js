@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import '../../assets/css/admin/nav.css';
+import '../../assets/css/admin/nav.css';
 
 export default class extends Component {
   render() {
     return (
-      <div id="admin top">
+      <div id="top">
         <div class="sitename pull-left">
           <a href="index.html">
             <h2><i class="fa fa-bullhorn"></i> <span class="hide-responsive">iReporter</span></h2>

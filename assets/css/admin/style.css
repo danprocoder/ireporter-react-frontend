@@ -1,0 +1,104 @@
+.sidenav {
+	width: 210px;
+	position: fixed;
+	left: 0;
+	top: 50px;
+	bottom: 0;
+	background: #af2a2a;
+	z-index: 999;
+	transition: width 0.28s;
+}
+
+.sidenav .sidenav-menus {
+	font-size: 15px;
+	margin-top: 18px;
+}
+
+.sidenav-menus .icon-wrapper {
+	display: inline-block;
+	width: 11px;
+}
+
+.sidenav-menus .text-wrapper {
+	margin-left: 20px;
+}
+
+.sidenav .sidenav-menus li {
+	padding: 0 5px;
+	margin-bottom: 1px;
+}
+
+.sidenav .sidenav-menus a {
+	color: #ffaba3;
+	display: block;
+	padding: 15px 10px;
+	border-radius: 3px;
+	transition: background 0.15s;
+	white-space: nowrap;
+}
+
+.sidenav .sidenav-menus a:hover {
+	background-color: #a22727;
+	color: #ffffff;
+}
+
+.sidenav .sidenav-menus li.active a {
+	background: #901a1a;
+	color: #ffffff;
+	box-shadow: 0 1px 2px #63180e;
+}
+
+.sidenav .sidenav-menus li .fa {
+	font-size: 20px;
+}
+
+.main-content {
+	margin-left: 210px;
+	padding-top: 50px;
+	position: relative;
+}
+
+body {
+	background: #fafafa !important;
+}
+
+.main-content .navbar {
+	padding: 0 20px;
+}
+
+.main-content .content {
+	padding: 0px 20px;
+}
+
+.main-content .content .p {
+	margin-top: 30px;
+}
+
+.main-content .content .navigation.header {
+	font-size: 17px;
+}
+
+.search-box {
+	display: inline-block;
+}
+
+.table-wrapper {
+	display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12)
+}
+
+.table-wrapper th {
+	border-top: none;
+}
+
+table td .status {
+	cursor: pointer;
+}
+
+#top .responsive-toggle {
+	display: none;
+}
