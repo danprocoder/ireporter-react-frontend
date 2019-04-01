@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Mapbox from '../Mapbox';
-import SideNav from './SideNav';
-import '../../../assets/css/admin/style.css';
+import Template from './Template';
 import '../../../assets/css/admin/dashboard.css';
 
 class Dashboard extends Component {
@@ -134,8 +133,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div class="main-content">
-        <SideNav />
+      <Template>
 
         <div class="content">
           <div class="inner">
@@ -230,8 +228,9 @@ class Dashboard extends Component {
             </div>
 
           </div>
-        </div>	
-      </div>
+        </div>
+        
+      </Template>
     );
   }
 }
