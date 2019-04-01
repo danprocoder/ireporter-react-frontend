@@ -22,10 +22,10 @@ Nav.propTypes = {
 const stateToProps = (state) => {
   const reducer = state.usersReducer;
 
-  const isLoggedIn = typeof reducer.user == 'object';
+  const isLoggedIn = (reducer.user.data != null);
   return {
     isLoggedIn,
-    user: isLoggedIn ? reducer.user : null
+    user: isLoggedIn ? reducer.user.data : null
   };
 };
 

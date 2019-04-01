@@ -1,16 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { appAction } from '../actiontypes/app';
+import { userActionCreator } from '../actions/users';
 import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
+import AdminDashboard from './admin/Dashboard';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
 class IReporter extends React.Component {
+  componentWillMount() {
+    const { dispatch } = this.props;
+
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      axios.get('auth', {
+        baseURL: API_HOST,
+        headers: {
+          'x-access-token': authToken
+        }
+      })
+        .then(response => {
+          dispatch(userActionCreator.logUserIn(authToken, response.data.data[0]));
+          dispatch({ type: appAction.READY });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      dispatch({ type: appAction.READY });
+    }
+  }
+
   render() {
+    if (this.props.appState !== 'ready') {
+      return null;
+    }
+
     return (
       <BrowserRouter>
         <div>
@@ -28,7 +58,7 @@ class IReporter extends React.Component {
             <Route path="/profile" />
 
             {/* Admin routes. */}
-            <Route path="/admin" />
+            <Route path="/admin" component={AdminDashboard} />
             <Route path="/admin/(red-flag|intervention)s" />
             <Route path="/admin/(red-flag|intervention)/:id" />
             <Route path="/admin/users" />
@@ -41,16 +71,10 @@ class IReporter extends React.Component {
   }
 }
 
-IReporter.propTypes = {
-  user: PropTypes.array
-};
-
-const stateToProps = (state) => {
-  const isLoggedIn = typeof state.user == 'object';
+const state2Props = (state) => {
   return {
-    isLoggedIn,
-    user: isLoggedIn ? state.user : null
+    appState: state.appReducer.state,
   };
 };
 
-export default connect(stateToProps)(IReporter);
+export default connect(state2Props)(IReporter);
