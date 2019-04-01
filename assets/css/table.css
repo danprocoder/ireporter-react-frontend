@@ -1,0 +1,31 @@
+.table-wrapper {
+	width: 100%;
+	overflow-y: auto;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table th {
+	text-align: left;
+	font-size: 14px;
+	border-top: 1px solid #f1f1f1;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 15px 8px;
+	text-transform: uppercase;
+	font-size: 11px;
+	white-space: nowrap;
+	color: #444;
+}
+
+table td {
+	border-top: 1px solid #dfdfdf;
+	padding: 15px 8px;
+	vertical-align: top;
+}
+
+table.striped tr:nth-child(even) td {
+    background: #fafafa;;
+}
