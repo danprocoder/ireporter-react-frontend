@@ -1,8 +1,8 @@
 import { appAction } from '../actiontypes/app';
 
-export default (state={ ready: false }, action) => {
+export default (state={ state: 'loaded' }, action) => {
   if (action.type === appAction.READY) {
-    state.ready = true;
+    state.state = 'ready';
   }
 
   return state;

@@ -1,6 +1,13 @@
 import { userAction } from '../actiontypes/users';
 
-export default (state, action) => {
+const initialState = {
+  user: {
+    authToken: null,
+    data: null
+  }
+};
+
+export default (state=initialState, action) => {
   const newState = { ...state };
   switch (action.type) {
     case userAction.LOG_IN:

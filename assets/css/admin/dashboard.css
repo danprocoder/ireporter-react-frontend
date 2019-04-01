@@ -133,6 +133,14 @@
 	color: #0078ff;
 }
 
+.overview .body .c.rejected .label {
+	background: #fa6a50;
+}
+
+.overview .body .c.rejected .num {
+	color: #fa6a50;
+}
+
 .overview .body .c.resolved .label {
 	background: #4fa012;
 }

@@ -46,8 +46,8 @@ export default (
                 <div class="f-right m-top-768">
                     <div class="footer-header">Follow Us</div>
                     <div class="m-top">
-                        <a href="#" class="social"><FontAwesomeIcon prefix="fab" icon="facebook" /></a>
-                        <a href="#" class="social"><FontAwesomeIcon icon={faTwitter} /></a>
+                        <a href="#" class="social"><FontAwesomeIcon icon={['fab', 'facebook-f']} /></a>
+                        <a href="#" class="social"><FontAwesomeIcon icon={['fab', 'twitter']} /></a>
                     </div>
                 </div>
 
