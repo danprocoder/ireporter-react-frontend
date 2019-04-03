@@ -10,6 +10,7 @@ import Login from './Login';
 import Signup from './Signup';
 import AdminDashboard from './admin/Dashboard';
 import AdminUsers from './admin/Users';
+import AdminIncidents from './admin/Incidents';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
@@ -59,7 +60,9 @@ class IReporter extends React.Component {
             <Route path="/profile" />
 
             {/* Admin routes. */}
-            <Route path="/admin/(red-flag|intervention)s" />
+            <Route key="red-flags" path="/admin/red-flags" render={(props) => <AdminIncidents type="red-flag" {...props} />} />
+            <Route key="interventions" path="/admin/interventions" render={(props) => <AdminIncidents type="intervention" {...props} />} />
+
             <Route path="/admin/(red-flag|intervention)/:id" />
             <Route path="/admin/users" component={AdminUsers} />
             <Route path="/admin" component={AdminDashboard} />

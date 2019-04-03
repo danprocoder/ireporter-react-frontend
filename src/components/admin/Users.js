@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Template from './Template';
+import TableRowLoading from '../skeletonscreens/TableRowLoading';
 import '../../../assets/css/table.css';
 import '../../../assets/css/admin/table.css';
 
@@ -11,7 +12,7 @@ class Users extends Component {
 
     this.state = {
       users: [],
-      contentLoaded: false,
+      contentState: 'fetching'
     };
   }
 
@@ -26,7 +27,7 @@ class Users extends Component {
       .then(responseData => {
         this.setState({
           users: responseData,
-          contentLoaded: true
+          contentState: 'loaded'
         });
       })
       .catch(error => {
@@ -54,15 +55,19 @@ class Users extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                  {this.state.users.map(user => (
-                    <tr key={user.email}>
-                      <td>&nbsp;</td>
-                      <td>{user.firstname} {user.lastname}</td>
-                      <td>{user.username}</td>
-                      <td>{user.email}</td>
-                      <td>{user.phonenumber}</td>
-                    </tr>
-                  ))}
+                  {this.state.contentState === 'fetching' ? (
+                    <TableRowLoading cols={5} rows={4} />
+                  ) : (
+                    this.state.users.map(user => (
+                      <tr key={user.email}>
+                        <td>&nbsp;</td>
+                        <td>{user.firstname} {user.lastname}</td>
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.phonenumber}</td>
+                      </tr>
+                    ))
+                  )}
                   </tbody>
                 </table>
               </div>

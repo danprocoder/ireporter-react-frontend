@@ -1,0 +1,23 @@
+.tab li,
+.tab li a {
+	display: inline-block;
+}
+
+.tab li a {
+	padding: 3px 9px;
+}
+
+.tab li.active a {
+	background: #429ed4;
+  color: #fff;
+  border-radius: 30px;
+}
+
+.tab li {
+	/*margin-right: 10px;*/
+}
+
+.tab li a {
+	color: #444;
+	font-size: 13px;
+}

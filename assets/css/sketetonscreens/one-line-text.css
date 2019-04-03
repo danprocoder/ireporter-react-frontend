@@ -1,0 +1,35 @@
+@keyframes oneLineText {
+  0% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 0%, #f4f4f4);
+  }
+
+  20% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 20%, #f4f4f4);
+  }
+
+  40% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 40%, #f4f4f4);
+  }
+
+  60% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 60%, #f4f4f4);
+  }
+
+  80% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 80%, #f4f4f4);
+  }
+
+  100% {
+    background: -webkit-linear-gradient(left, #f4f4f4 0%, #efefef 100%, #f4f4f4);
+  }
+}
+
+.skeleton-screen.one-line-text {
+  display: inline-block;
+  width: 100%;
+  border-radius: 5px;
+  animation-name: oneLineText;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
