@@ -1,1 +1,3 @@
 # IReporter
+
+[![Build Status](https://travis-ci.com/danprocoder/ireporter-react-frontend.svg?branch=develop)](https://travis-ci.com/danprocoder/ireporter-react-frontend) [![Test Coverage](https://api.codeclimate.com/v1/badges/50e62d6d13c25a255f08/test_coverage)](https://codeclimate.com/github/danprocoder/ireporter-react-frontend/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/50e62d6d13c25a255f08/maintainability)](https://codeclimate.com/github/danprocoder/ireporter-react-frontend/maintainability)
