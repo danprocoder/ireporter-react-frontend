@@ -1,0 +1,43 @@
+.skeleton-screen-view-record {
+  .navigation {
+    .one-line-text {
+      width: 60%;
+    }
+  }
+
+  .title {
+    .one-line-text {
+      height: 35px;
+    }
+
+    margin-top: 35px;
+  }
+
+  .meta {
+    .date {
+      float: left;
+      width: 230px;
+    }
+
+    .status {
+      float: right;
+      width: 140px;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    margin-top: 10px;
+  }
+
+  .record-content {
+    margin-top: 30px;
+
+    .one-line-text {
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -3,7 +3,14 @@ import '../../../assets/css/sketetonscreens/one-line-text.css';
 
 class OneLineText extends Component {
   render() {
-    return <span class="skeleton-screen one-line-text">&nbsp;</span>
+    const props = {
+      className: 'skeleton-screen one-line-text'
+    };
+    if (this.props.className) {
+      props.className += ` ${this.props.className}`;
+    }
+    
+    return <span {...props}>&nbsp;</span>
   }
 }
 
