@@ -1,0 +1,105 @@
+.view-content .title {
+	font-size: 35px;
+	margin-top: 35px;
+	line-height: 106%;
+	font-family: 'Georgia';
+}
+
+.view-content .info-wrapper {
+	margin-top: 10px;
+}
+
+.view-content .info-wrapper .info {
+	margin-right: 7px;
+	font-size: 14px;
+}
+
+.view-content .info-wrapper .info.date {
+	color: #777;
+}
+
+.view-content .info-wrapper .info.map {
+	margin-left: 20px;
+	display: none;
+}
+
+.view-content .info-wrapper .info.map a {
+	color: #4fa012;
+}
+
+.view-content .info-wrapper .info.record-status {
+	float: right;
+}
+
+/* Map */
+
+.view-content .map-wrapper {
+	margin-top: 50px;
+	background: #ffffff;
+	border: 1px solid #eaeaea;
+    border-radius: 2px;
+}
+
+.view-content .map-wrapper .location-text {
+	padding: 10px 7px;
+}
+
+.view-content .map-wrapper .location-text .fa-map-marker {
+	color: #4fa012;
+}
+
+.view-content #map-container {
+	width: 100%;
+	height: 410px;
+}
+
+.view-content .record-content {
+	margin-top: 30px;
+	padding-bottom: 58px;
+}
+
+.view-content .record-content .comment {
+	margin-top: 15px;
+	line-height: 150%;
+	white-space: pre-wrap;
+}
+
+.view-content .record-content.has-map .js-coords-text {
+  font-size: 13px;
+  color: #555;
+}
+
+.view-content record-content .map-wrapper {
+	display: none;
+}
+
+.view-content .record-content.has-map .map-wrapper {
+	display: block;
+}
+
+.view-content .media-section {
+	margin-top: 30px;
+}
+
+.view-content .section-header {
+	font-weight: 700;
+}
+
+.view-content .media-section .media-wrapper {
+	margin-top: 10px;
+}
+
+.view-content .media-section .media-wrapper .image {
+    width: 290px;
+    min-height: 290px;
+    height: auto;
+    margin-right: 8px;
+}
+
+@media screen and (max-width: 630px) {
+  .view-content .media-section .media-wrapper .image {
+  	width: 100%;
+  	margin-right: 0;
+  	margin-top: 8px;
+  }
+}

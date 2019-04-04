@@ -8,7 +8,7 @@ class SideNav extends Component {
         <div className="sidenav-menus">
           <ul>
             <SideNavMenuItem url="/admin" text="Dashboard" />
-            <SideNavMenuItem url="/admin/red-flags" text="Red-Flags" />
+            <SideNavMenuItem url="/admin/red-flags" text="Red Flags" />
             <SideNavMenuItem url="/admin/interventions" text="Interventions" />
             <SideNavMenuItem url="/admin/users" text="Users" />
           </ul>

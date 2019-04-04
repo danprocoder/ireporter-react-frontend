@@ -81,17 +81,17 @@ class Incident extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                    {this.state.incidentsState === 'fetching' ? (
+                      {this.state.incidentsState === 'fetching' ? (
                       <TableRowLoading cols={5} rows={3} />
-                    ) : (
-                    this.state.incidents.map((record, index) => <tr>
-                      <td>{index + 1}</td>
-                      <td><Link to={`admin/${this.props.type}s/${record.id}`}>{record.title}</Link></td>
-                      <td>{record.createdon}</td>
-                      <td>{record.status}</td>
-                      <td>Like</td>
-                    </tr>)
-                    )}
+                      ) : (
+                      this.state.incidents.map((record, index) => <tr>
+                        <td>{index + 1}</td>
+                        <td><Link to={`/admin/${this.props.type}/${record.id}`}>{record.title}</Link></td>
+                        <td>{record.createdon}</td>
+                        <td>{record.status}</td>
+                        <td>Like</td>
+                      </tr>)
+                      )}
                     </tbody>
                   </table>
                 </div>
