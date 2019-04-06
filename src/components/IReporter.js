@@ -6,7 +6,7 @@ import { appAction } from '../actiontypes/app';
 import { userActionCreator } from '../actions/users';
 import Nav from './Nav';
 import Home from './Home.jsx';
-import Login from './Login';
+import Login from './Login.jsx';
 import Signup from './Signup';
 import AdminDashboard from './admin/Dashboard';
 import AdminUsers from './admin/Users';
