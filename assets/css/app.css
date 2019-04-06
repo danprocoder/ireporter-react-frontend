@@ -1,5 +1,5 @@
 body {
-    font-family: 'karla';
+    font-family: 'Roboto';
     line-height: 100%;
 }
 
@@ -96,33 +96,6 @@ textarea {
 
 .grid-container .grid-10 {
     width: 10%;
-}
-
-
-/* Dropdowns */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    display: none;
-    background: #ffffff !important;
-    box-shadow: 0 2px 3px #ccc;
-    z-index: 999999999999999;
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: 9px;
-    color: #777!important;
-}
-
-.dropdown-menu li a:hover {
-    background: #ededed!important;
-    color: #333!important;
 }
 
 /* button */

@@ -10,8 +10,8 @@ import Login from './Login';
 import Signup from './Signup';
 import AdminDashboard from './admin/Dashboard';
 import AdminUsers from './admin/Users';
-import AdminIncidents from './admin/Incidents';
-import AdminViewIncident from './admin/ViewIncident';
+import AdminIncidents from './admin/Incidents.jsx';
+import AdminViewIncident from './admin/ViewIncident.jsx';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
@@ -24,7 +24,7 @@ class IReporter extends React.Component {
       axios.get('auth', {
         baseURL: API_HOST,
         headers: {
-          'x-access-token': authToken
+          'x-access-token': authToken,
         }
       })
         .then(response => {
