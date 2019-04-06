@@ -19,6 +19,7 @@
         "react"
     ],
     "rules": {
-        "react/forbid-prop-types": "off"
+        "react/forbid-prop-types": "off",
+        "jsx-a11y/anchor-is-valid": "off"
     }
 }
