@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Mapbox from '../Mapbox';
@@ -16,37 +17,38 @@ class ViewIncident extends Component {
     this.state = {
       navTypeText: (this.type === 'red-flag' ? 'Red Flags' : 'Interventions'),
       incident: null,
-      incidentState: 'fetching'
+      incidentState: 'fetching',
     };
   }
 
+  componentWillMount() {
+    this.fetchIncident();
+  }
+
   fetchIncident() {
-    const { id } = this.props.match.params;
-    axios.get(`${this.type}s/${id}`, {
+    const { match, authToken } = this.props;
+
+    axios.get(`${this.type}s/${match.params.id}`, {
       baseURL: API_HOST,
       headers: {
-        'x-access-token': this.props.authToken
-      }
+        'x-access-token': authToken,
+      },
     })
       .then(response => response.data.data[0])
-      .then(incident => {
+      .then((incident) => {
         this.setState({
           incident,
-          incidentState: 'loaded'
+          incidentState: 'loaded',
         });
       })
-      .catch(error => {
+      .catch((error) => {
 
       });
   }
 
   incidentHasLocation() {
-    const { longitude, latitude } = this.state.incident;
-    return longitude && latitude;
-  }
-
-  componentWillMount() {
-    this.fetchIncident();
+    const { incident } = this.state;
+    return incident.longitude && incident.latitude;
   }
 
   render() {
@@ -54,43 +56,67 @@ class ViewIncident extends Component {
       <Template>
         <div className="content view-content">
           {this.state.incidentState === 'loaded' ? (
-          <div class="inner" id="incident">
+            <div className="inner" id="incident">
 
             <div>
-              <div class="navigation"><Link to={`/admin/${this.type}s`}>{this.state.navTypeText}</Link> / {this.state.incident.title}</div>
-              <div class="title">{this.state.incident.title}</div>
-              <div class="info-wrapper">
-                <span class="info date">{this.state.incident.createdon}</span>
+              <div className="navigation">
+<Link to={`/admin/${this.type}s`}>{this.state.navTypeText}</Link>
+{' '}
+/
+{' '}
+{this.state.incident.title}
+</div>
+              <div className="title">{this.state.incident.title}</div>
+              <div className="info-wrapper">
+                <span className="info date">{this.state.incident.createdon}</span>
                 {this.incidentHasLocation() && (
-                <span class="info map"><a href="#map-area" title="View map"><i class="fa fa-map"></i> Map</a></span>
+                <span className="info map"><a href="#map-area" title="View map">
+<i class="fa fa-map"></i>
+{' '}
+Map
+</a></span>
                 )}
-                <span class="info record-status dropdown" id="status-dd">
-                  <span class="selected">{this.state.incident.status}</span> <i class="fa fa-caret-down"></i>
-                  <ul class="dropdown-menu">
+                <span className="info record-status dropdown" id="status-dd">
+                  <span className="selected">{this.state.incident.status}</span> 
+{' '}
+<i class="fa fa-caret-down"></i>
+                  <ul className="dropdown-menu">
                     <li><a href="#">In Draft</a></li>
                     <li><a href="#">Under Investigation</a></li>
                     <li><a href="#">Resolved</a></li>
                     <li><a href="#">Rejected</a></li>
                   </ul>
                 </span>
-                <div class="clearfix"></div>
+                <div className="clearfix" />
               </div>
             </div>
 
-            <div class="record-content">
-              <div class="comment">{this.state.incident.comment}</div>
+            <div className="record-content">
+              <div className="comment">{this.state.incident.comment}</div>
 
               {this.incidentHasLocation() && (
-              <div class="map-wrapper" id="map-area">
-                <div class="location-text"><i class="fa fa-map-marker"></i> {this.state.incident.longitude}&deg;, {this.state.incident.latitude}&deg;</div>
+              <div className="map-wrapper" id="map-area">
+                <div className="location-text">
+<i class="fa fa-map-marker"></i> 
+{' '}
+{this.state.incident.longitude}
+&deg;,
+{' '}
+{this.state.incident.latitude}
+&deg;
+</div>
                 <Mapbox coords={{ lat: parseFloat(this.state.incident.latitude), lng: parseFloat(this.state.incident.longitude) }} />
               </div>
               )}
 
               {this.state.incident.Images.length > 0 && (
-              <div class="media-section images">
-                <div class="section-header"><i class="fa fa-image"></i> Images</div>
-                <div class="media-wrapper">
+              <div className="media-section images">
+                <div className="section-header">
+<i class="fa fa-image"></i>
+{' '}
+Images
+</div>
+                <div className="media-wrapper">
                   {this.state.incident.Images.map((src, index) => <Image key={index} src={src} />)}
                 </div>
               </div>
@@ -99,15 +125,20 @@ class ViewIncident extends Component {
 
           </div>
           ) : (
-          <ViewSingleIncidentSkeleton incidentsUrlPath={`${this.type}s`} navTypeText={this.state.navTypeText} />
-          )}	
+            <ViewSingleIncidentSkeleton incidentsUrlPath={`${this.type}s`} navTypeText={this.state.navTypeText} />
+          )}
         </div>
       </Template>
     );
   }
 }
 
-const state2props = state => {
+ViewIncident.propTypes = {
+  match: PropTypes.object.isRequired,
+  authToken: PropTypes.string.isRequired,
+};
+
+const state2props = (state) => {
   const { authToken } = state.usersReducer.user;
   return { authToken };
 };
