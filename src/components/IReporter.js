@@ -5,7 +5,7 @@ import axios from 'axios';
 import { appAction } from '../actiontypes/app';
 import { userActionCreator } from '../actions/users';
 import Nav from './Nav';
-import Home from './Home';
+import Home from './Home.jsx';
 import Login from './Login';
 import Signup from './Signup';
 import AdminDashboard from './admin/Dashboard';
