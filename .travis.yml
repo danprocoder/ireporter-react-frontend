@@ -16,7 +16,10 @@ before_script:
  - ./cc-test-reporter before-build
 
 script:
- - npm test
+ - nyc --reporter=lcov npm test
 
 after_script:
  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+notifications:
+ email: false
