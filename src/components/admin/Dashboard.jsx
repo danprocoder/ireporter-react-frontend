@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -18,72 +19,21 @@ class Dashboard extends Component {
         inDraft: 0,
         underInvestigation: 0,
         rejected: 0,
-        total: 0
+        total: 0,
       },
       interventions: {
         inDraft: 0,
         underInvestigation: 0,
         rejected: 0,
-        total: 0
+        total: 0,
       },
       adminCoordinates: {
         lng: 0,
-        lat: 0
+        lat: 0,
       },
       locationReceived: false,
-      locationText: 'Getting your location...'
+      locationText: 'Getting your location...',
     };
-  }
-
-  loadNumUsers() {
-    axios.get('admin/users/count', {
-      baseURL: API_HOST,
-      headers: {
-        'x-access-token': this.props.user.authToken
-      }
-    })
-      .then(response => {
-        this.setState({
-          numUsers: response.data.data[0].count,
-        });
-      })
-      .catch(error => {
-        if (error.response) {
-          console.error(error.response);
-        } else {
-          console.error('Failed to connect error');
-        }
-      });
-
-    return this;
-  }
-
-  loadIncidentStats(urlPath) {
-    return axios.get(`${urlPath}/stats`, {
-      baseURL: API_HOST,
-      headers: {
-        'x-access-token': this.props.user.authToken
-      }
-    })
-      .then(response => {
-        response = response.data.data[0];
-        response.type = urlPath;
-        return response;
-      });
-  }
-
-  getUsersLocation() {
-    if (navigator.geolocation) {
-	  	navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({
-          adminCoordinates: {
-            lng: position.coords.longitude,
-            lat: position.coords.latitude
-          },
-          locationReceived: true
-        });
-	  	});
-	  }
   }
 
   componentWillMount() {
@@ -93,12 +43,12 @@ class Dashboard extends Component {
     // Load total number of incidents.
     Promise.all([
       this.loadIncidentStats('red-flags'),
-      this.loadIncidentStats('interventions')
+      this.loadIncidentStats('interventions'),
     ])
-      .then(response => {
+      .then((response) => {
         const newState = {
           totalResolved: 0,
-          totalIncidents: 0
+          totalIncidents: 0,
         };
 
         response.forEach((val) => {
@@ -111,10 +61,10 @@ class Dashboard extends Component {
             total: totalIncidents,
             inDraft: val['in-draft'],
             underInvestigation: val['under-investigation'],
-            rejected: val.rejected
+            rejected: val.rejected,
           };
 
-          if (val.type == 'red-flags') {
+          if (val.type === 'red-flags') {
             newState.redFlags = incidentStats;
           } else {
             newState.interventions = incidentStats;
@@ -123,12 +73,67 @@ class Dashboard extends Component {
 
         this.setState(newState);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
 
     // Get users location
     this.getUsersLocation();
+  }
+
+  getUsersLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({
+          adminCoordinates: {
+            lng: position.coords.longitude,
+            lat: position.coords.latitude,
+          },
+          locationReceived: true,
+        });
+      });
+    }
+  }
+
+  loadNumUsers() {
+    const { user } = this.props;
+
+    axios.get('admin/users/count', {
+      baseURL: API_HOST,
+      headers: {
+        'x-access-token': user.authToken,
+      },
+    })
+      .then((response) => {
+        this.setState({
+          numUsers: response.data.data[0].count,
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.error(error.response);
+        } else {
+          console.error('Failed to connect error');
+        }
+      });
+
+    return this;
+  }
+
+  loadIncidentStats(urlPath) {
+    const { user } = this.props;
+
+    return axios.get(`${urlPath}/stats`, {
+      baseURL: API_HOST,
+      headers: {
+        'x-access-token': user.authToken,
+      },
+    })
+      .then(response => response.data.data[0])
+      .then((response) => {
+        response.type = urlPath;
+        return response;
+      });
   }
 
   render() {
@@ -235,6 +240,10 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
 const state2Props = (state) => {
   const reducer = state.usersReducer;
 
@@ -242,8 +251,8 @@ const state2Props = (state) => {
   return {
     user: {
       isLoggedIn,
-      authToken: isLoggedIn ? reducer.user.authToken : null
-    }
+      authToken: isLoggedIn ? reducer.user.authToken : null,
+    },
   };
 };
 

@@ -8,7 +8,7 @@ import Nav from './Nav';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup';
-import AdminDashboard from './admin/Dashboard';
+import AdminDashboard from './admin/Dashboard.jsx';
 import AdminUsers from './admin/Users';
 import AdminIncidents from './admin/Incidents.jsx';
 import AdminViewIncident from './admin/ViewIncident.jsx';
