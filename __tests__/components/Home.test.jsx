@@ -1,6 +1,6 @@
 import { render, cleanup } from 'react-testing-library';
 import React from 'react';
-import Home from '../src/components/Home.jsx';
+import Home from '../../src/components/Home.jsx';
 
 afterEach(cleanup);
 
