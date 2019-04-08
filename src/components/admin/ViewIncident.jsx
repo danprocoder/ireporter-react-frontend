@@ -6,7 +6,7 @@ import axios from 'axios';
 import Mapbox from '../Mapbox';
 import Image from '../widgets/Image';
 import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown.jsx';
-import Template from './Template';
+import Template from './Template.jsx';
 import ViewSingleIncidentSkeleton from '../skeletonscreens/ViewSingleIncident';
 import '../../../assets/css/view-record.css';
 

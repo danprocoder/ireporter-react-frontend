@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AdminNav from './AdminNav';
 import UserNav from './UserNav';
 import DefaultNav from './DefaultNav';
 
 class Nav extends Component {
   render() {
     return this.props.isLoggedIn ? (
-      this.props.user.isAdmin ? <AdminNav /> : <UserNav />
+      this.props.user.isAdmin ? null : <UserNav />
     ) : (
       <DefaultNav />
     );

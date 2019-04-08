@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Template from './Template';
+import Template from './Template.jsx';
 import TableRowLoading from '../skeletonscreens/TableRowLoading';
 import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown.jsx';
 import '../../../assets/css/tab.css';

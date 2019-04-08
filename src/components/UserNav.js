@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../assets/css/nav.css';
 import '../../assets/css/user-nav.css';
 
 export default class extends Component {

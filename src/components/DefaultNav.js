@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../../assets/css/nav.css';
 import '../../assets/css/default-nav.css';
 
 export default class extends Component {

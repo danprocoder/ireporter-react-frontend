@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Mapbox from '../Mapbox';
-import Template from './Template';
+import Template from './Template.jsx';
 import '../../../assets/css/admin/dashboard.css';
 
 class Dashboard extends Component {
@@ -31,7 +31,7 @@ class Dashboard extends Component {
         lng: 0,
         lat: 0,
       },
-      locationReceived: false,
+      locationStatus: 'fetching',
       locationText: 'Getting your location...',
     };
   }
@@ -81,6 +81,13 @@ class Dashboard extends Component {
     this.getUsersLocation();
   }
 
+  onLocationError() {
+    this.setState({
+      locationText: 'Unable to get your location',
+      locationStatus: 'failed',
+    });
+  }
+
   getUsersLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -89,9 +96,9 @@ class Dashboard extends Component {
             lng: position.coords.longitude,
             lat: position.coords.latitude,
           },
-          locationReceived: true,
+          locationStatus: 'ready',
         });
-      });
+      }, this.onLocationError);
     }
   }
 
@@ -136,105 +143,88 @@ class Dashboard extends Component {
       });
   }
 
+  widget = (icon, label, value) => (
+    <div className="widget counter">
+      <div className="num">{value}</div>
+      <div className="label">{label}</div>
+      <i className={`fa fa-${icon}`} />
+    </div>
+  );
+
+  overview = (header, stats) => (
+    <div className="widget overview">
+      <div className="top">
+        <i className="fa fa-flag"></i>
+        <div className="header">{header} Overview</div>
+        <div className="total"><b>{stats.total}</b> Total</div>
+      </div>
+      <div className="body">
+        <div>
+          <div className="c in-draft">
+            <div className="num">{stats.inDraft}</div>
+            <div className="label">In Draft</div>
+          </div>
+          <div className="c under-investigation">
+            <div className="num">{stats.underInvestigation}</div>
+            <div className="label">Investigating</div>
+          </div>
+          <div className="c rejected">
+            <div className="num">{stats.rejected}</div>
+            <div className="label">Rejected</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   render() {
+    const {
+      numUsers,
+      totalIncidents,
+      totalResolved,
+      redFlags,
+      interventions,
+      adminCoordinates,
+      locationStatus,
+      locationText,
+    } = this.state;
+
     return (
       <Template>
 
-        <div class="content">
-          <div class="inner">
-            <div class="navigation header">Dashboard</div>
+        <div className="content">
+          <div className="inner">
+            <div className="navigation header">Dashboard</div>
 
-            <div class="margin-top">
-              <div class="widget counter total-users">
-                <div class="num">{this.state.numUsers}</div>
-                <div class="label">Registered Users</div>
-                <FontAwesomeIcon icon={['fas', 'users']} />
-              </div>
-              <div class="widget counter total-incidents">
-                <div class="num">{this.state.totalIncidents}</div>
-                <div class="label">Total Incidents</div>
-                <FontAwesomeIcon icon={['fas', 'bullhorn']} />
-              </div>
-              <div class="widget counter total-incidents">
-                <div class="num">{this.state.totalResolved}</div>
-                <div class="label">Total Resolved</div>
-                <FontAwesomeIcon icon={['fas', 'check']} />
-              </div>
-
-              <div class="clearfix"></div>
+            <div className="margin-top">
+              {this.widget('users', 'Registered Users', numUsers)}
+              {this.widget('bullhorn', 'Total Incidents', totalIncidents)}
+              {this.widget('check', 'Total Resolved', totalResolved)}
+              <div className="clearfix"></div>
             </div>
 
-
-            <div class="margin-top">
-            
-              <div class="widget overview red-flags">
-                <div class="top">
-                  <i class="fa fa-flag"></i>
-                  <div class="header">Red Flags Overview</div>
-                  <div class="total"><b>{this.state.redFlags.total}</b> Total</div>
-                </div>
-                <div class="body">
-                  <div>
-                    <div class="c in-draft">
-                      <div class="num">{this.state.redFlags.inDraft}</div>
-                      <div class="label">In Draft</div>
-                    </div>
-                    <div class="c under-investigation">
-                      <div class="num">{this.state.redFlags.underInvestigation}</div>
-                      <div class="label">Investigating</div>
-                    </div>
-                    <div class="c rejected">
-                      <div class="num">{this.state.redFlags.rejected}</div>
-                      <div class="label">Rejected</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="widget overview interventions">
-                <div class="top">
-                  <i class="fa fa-question"></i>
-                  <div class="header">Interventions Overview</div>
-                  <div class="total"><b>{this.state.interventions.total}</b> Total</div>
-                </div>
-                <div class="body">
-                  <div>
-                    <div class="c in-draft">
-                      <div class="num">{this.state.interventions.inDraft}</div>
-                      <div class="label">In Draft</div>
-                    </div>
-                    <div class="c under-investigation">
-                      <div class="num">{this.state.interventions.underInvestigation}</div>
-                      <div class="label">Investigating</div>
-                    </div>
-                    <div class="c rejected">
-                      <div class="num">{this.state.interventions.rejected}</div>
-                      <div class="label">Rejected</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix"></div>
-
+            <div className="margin-top">
+              {this.overview('Red Flags', redFlags)}
+              {this.overview('Interventions', interventions)}
+              <div className="clearfix"></div>
             </div>
 
-            <div class="margin-top">
-              <div class="widget map">
-                <div class="top">
-                  <div class="header">Where you are</div>
+            <div className="margin-top">
+              <div className="widget map">
+                <div className="top">
+                  <div className="header">Where you are</div>
                 </div>
-                {this.state.locationReceived ? (
-                  <Mapbox coords={this.state.adminCoordinates} />
+                {locationStatus === 'ready' ? (
+                  <Mapbox coords={adminCoordinates} />
                 ) : (
-                  <div id="map-container">{this.state.locationText}</div>
+                  <div id="map-container">{locationText}</div>
                 )}
               </div>
             </div>
 
           </div>
         </div>
-        
+
       </Template>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import Template from './Template';
+import Template from './Template.jsx';
 import TableRowLoading from '../skeletonscreens/TableRowLoading';
 import '../../../assets/css/table.css';
 import '../../../assets/css/admin/table.css';
