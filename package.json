@@ -4,9 +4,9 @@
   "description": "A platform where users can report cases of corruption or things that need government intervention",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start:dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
