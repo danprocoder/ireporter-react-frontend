@@ -4,6 +4,7 @@
   "description": "A platform where users can report cases of corruption or things that need government intervention",
   "main": "index.js",
   "scripts": {
+    "start": "serve -l 80 -s dist",
     "start:dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "test": "jest --coverage"
@@ -45,7 +46,6 @@
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.7.1",
-    "nyc": "^13.3.0",
     "react-testing-library": "^6.1.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
@@ -65,7 +65,8 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "serve": "^11.0.0"
   },
   "jest": {
     "moduleNameMapper": {
