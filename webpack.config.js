@@ -1,10 +1,10 @@
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 require('dotenv').config();
 
 // Define environment variables.
-envVariables = {};
+const envVariables = {};
 Object.keys(process.env).forEach((key) => {
   envVariables[key] = JSON.stringify(process.env[key]);
 });
@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.resolve('dist'),
     filename: 'app.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -22,31 +22,31 @@ module.exports = {
         test: [/\.js$/, /\.jsx$/],
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(css|scss)$/,
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png)$/,
-        use: ['file-loader']
-      }
-    ]
+        use: ['file-loader'],
+      },
+    ],
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
-    new webpack.DefinePlugin(envVariables)
-  ]
+    new webpack.DefinePlugin(envVariables),
+  ],
 };
