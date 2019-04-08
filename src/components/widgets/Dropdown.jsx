@@ -77,9 +77,9 @@ class Dropdown extends Component {
         {menuShown && (
         <ul className="dropdown-menu">
           {items.map((item, index) => (
-          <li key={index}>
-            <a href="#" onClick={() => this.onItemClick(index)}>{item}</a>
-          </li>
+            <li key={index.toString()}>
+              <a href="#" onClick={() => this.onItemClick(index)}>{item}</a>
+            </li>
           ))}
         </ul>
         )}
@@ -92,6 +92,8 @@ Dropdown.defaultProps = {
   changeOnItemSelected: true,
   selectedIndex: 0,
   disabled: false,
+  className: undefined,
+  onItemSelected: undefined,
 };
 
 Dropdown.propTypes = {

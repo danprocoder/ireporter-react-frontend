@@ -1,8 +1,8 @@
 import React from 'react';
 import { node } from 'prop-types';
 import SideNav from './SideNav';
-import TopNav from './Nav.jsx';
-import '../../../assets/css/admin/style.css';
+import TopNav from './Nav';
+import '../../../assets/scss/admin/style.scss';
 
 const Template = ({ children }) => (
   <div className="admin">

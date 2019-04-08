@@ -5,8 +5,8 @@
     right: 0;
     z-index: 9999999999999;
     background: #f54343;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     padding-right: 20px;
     box-shadow: 0 1px 12px #0000007d;
 
@@ -16,15 +16,26 @@
       clear: both;
     }
 
-    .sitename a {
-      width: 190px;
-      height: 49px;
-      line-height: 50px;
-      background: #de3838;
-      display: block;
-      color: yellow;
-      padding: 0 10px;
-      border-bottom: 1px solid #e8e802;
+    .responsive-toggle {
+      display: none;
+    }
+
+    .sitename {
+      a {
+        width: 190px;
+        height: 60px;
+        line-height: 60px;
+        background: #de3838;
+        display: block;
+        color: yellow;
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 21px;
+
+        .text {
+          margin-left: 8px;
+        }
+      }
     }
 
     .responsive-toggle {
@@ -35,17 +46,38 @@
       color: #ffffff;
     }
 
-    .dropdown-menu {
-      width: 180px;
-      padding: 5px 0;
+    .navbar-menu {
+      display: flex;
+      justify-content: left;
 
-      a {
-        line-height: 100%;
+      & > li {
+        margin-left: 30px;
+      }
+
+      .dropdown-menu {
+        width: 180px;
+        padding: 5px 0;
+  
+        a {
+          line-height: 100%;
+        }
       }
     }
   }
 
-  .fa-caret-down {
+  .fa-angle-down {
     color: #ff9589;
+  }
+
+  @media screen and (max-width: 768px) {
+    #top {
+      .responsive-toggle {
+        display: block;
+      }
+
+      .hide-responsive {
+        display: none;
+      }
+    }
   }
 }

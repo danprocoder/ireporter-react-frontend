@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { func as funcProps, string as stringProps } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { appAction } from '../actiontypes/app';
 import { userActionCreator } from '../actions/users';
 import Nav from './Nav';
-import Home from './Home.jsx';
-import Login from './Login.jsx';
+import Home from './Home';
+import Login from './Login';
 import Signup from './Signup';
-import AdminDashboard from './admin/Dashboard.jsx';
+import AdminDashboard from './admin/Dashboard';
 import AdminUsers from './admin/Users';
-import AdminIncidents from './admin/Incidents.jsx';
-import AdminViewIncident from './admin/ViewIncident.jsx';
+import AdminIncidents from './admin/Incidents';
+import AdminViewIncident from './admin/ViewIncident';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
-class IReporter extends React.Component {
+class IReporter extends Component {
   componentWillMount() {
     const { dispatch } = this.props;
 
@@ -25,14 +26,13 @@ class IReporter extends React.Component {
         baseURL: API_HOST,
         headers: {
           'x-access-token': authToken,
-        }
+        },
       })
-        .then(response => {
+        .then((response) => {
           dispatch(userActionCreator.logUserIn(authToken, response.data.data[0]));
           dispatch({ type: appAction.READY });
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
         });
     } else {
       dispatch({ type: appAction.READY });
@@ -40,8 +40,15 @@ class IReporter extends React.Component {
   }
 
   render() {
-    if (this.props.appState !== 'ready') {
-      return null;
+    const { appState } = this.props;
+
+    if (appState !== 'ready') {
+      return (
+        <div>
+          <h1>iReporter</h1>
+          <div>Loading....</div>
+        </div>
+      );
     }
 
     return (
@@ -61,15 +68,15 @@ class IReporter extends React.Component {
             <Route path="/profile" />
 
             {/* Admin routes. */}
-            <Route key="red-flags" path="/admin/red-flags" render={(props) => <AdminIncidents type="red-flag" {...props} />} />
-            <Route key="interventions" path="/admin/interventions" render={(props) => <AdminIncidents type="intervention" {...props} />} />
+            <Route key="red-flags" path="/admin/red-flags" render={props => <AdminIncidents type="red-flag" {...props} />} />
+            <Route key="interventions" path="/admin/interventions" render={props => <AdminIncidents type="intervention" {...props} />} />
 
             <Route key="view-red-flag" path="/admin/red-flag/:id" component={AdminViewIncident} />
             <Route key="view-intervention" path="/admin/intervention/:id" component={AdminViewIncident} />
 
             <Route path="/admin/users" component={AdminUsers} />
             <Route exact path="/admin" component={AdminDashboard} />
-            
+
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -78,10 +85,13 @@ class IReporter extends React.Component {
   }
 }
 
-const state2Props = (state) => {
-  return {
-    appState: state.appReducer.state,
-  };
+IReporter.propTypes = {
+  dispatch: funcProps.isRequired,
+  appState: stringProps.isRequired,
 };
+
+const state2Props = state => ({
+  appState: state.appReducer.state,
+});
 
 export default connect(state2Props)(IReporter);

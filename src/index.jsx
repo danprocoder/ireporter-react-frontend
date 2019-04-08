@@ -9,6 +9,7 @@ const store = createStore(reducers);
 
 ReactDOM.render(
   <Provider store={store}>
-    <IReporter/>
+    <IReporter />
   </Provider>,
-  document.getElementById('root'));
+  document.getElementById('root'),
+);

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Mapbox from '../Mapbox';
-import Template from './Template.jsx';
+import Template from './Template';
 import '../../../assets/css/admin/dashboard.css';
 
 class Dashboard extends Component {
@@ -52,9 +51,14 @@ class Dashboard extends Component {
         };
 
         response.forEach((val) => {
-          newState.totalResolved += parseInt(val.resolved);
+          newState.totalResolved += parseInt(val.resolved, 10);
 
-          const totalIncidents = parseInt(val['in-draft']) + parseInt(val['under-investigation']) + parseInt(val.resolved) + parseInt(val.rejected);
+          const totalIncidents = (
+            parseInt(val['in-draft'], 10)
+            + parseInt(val['under-investigation'], 10)
+            + parseInt(val.resolved, 10)
+            + parseInt(val.rejected, 10)
+          );
           newState.totalIncidents += totalIncidents;
 
           const incidentStats = {
@@ -143,39 +147,51 @@ class Dashboard extends Component {
       });
   }
 
-  widget = (icon, label, value) => (
-    <div className="widget counter">
-      <div className="num">{value}</div>
-      <div className="label">{label}</div>
-      <i className={`fa fa-${icon}`} />
-    </div>
-  );
-
-  overview = (header, stats) => (
-    <div className="widget overview">
-      <div className="top">
-        <i className="fa fa-flag"></i>
-        <div className="header">{header} Overview</div>
-        <div className="total"><b>{stats.total}</b> Total</div>
+  widget(icon, label, value) {
+    return (
+      <div className="widget counter">
+        <div className="num">{value}</div>
+        <div className="label">{label}</div>
+        <i className={`fa fa-${icon}`} />
       </div>
-      <div className="body">
-        <div>
-          <div className="c in-draft">
-            <div className="num">{stats.inDraft}</div>
-            <div className="label">In Draft</div>
+    );
+  }
+
+  overview(header, stats) {
+    return (
+      <div className="widget overview">
+        <div className="top">
+          <i className="fa fa-flag" />
+          <div className="header">
+            {header}
+            {' '}
+            Overview
           </div>
-          <div className="c under-investigation">
-            <div className="num">{stats.underInvestigation}</div>
-            <div className="label">Investigating</div>
+          <div className="total">
+            <b>{stats.total}</b>
+            {' '}
+            Total
           </div>
-          <div className="c rejected">
-            <div className="num">{stats.rejected}</div>
-            <div className="label">Rejected</div>
+        </div>
+        <div className="body">
+          <div>
+            <div className="c in-draft">
+              <div className="num">{stats.inDraft}</div>
+              <div className="label">In Draft</div>
+            </div>
+            <div className="c under-investigation">
+              <div className="num">{stats.underInvestigation}</div>
+              <div className="label">Investigating</div>
+            </div>
+            <div className="c rejected">
+              <div className="num">{stats.rejected}</div>
+              <div className="label">Rejected</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   render() {
     const {
@@ -200,13 +216,13 @@ class Dashboard extends Component {
               {this.widget('users', 'Registered Users', numUsers)}
               {this.widget('bullhorn', 'Total Incidents', totalIncidents)}
               {this.widget('check', 'Total Resolved', totalResolved)}
-              <div className="clearfix"></div>
+              <div className="clearfix" />
             </div>
 
             <div className="margin-top">
               {this.overview('Red Flags', redFlags)}
               {this.overview('Interventions', interventions)}
-              <div className="clearfix"></div>
+              <div className="clearfix" />
             </div>
 
             <div className="margin-top">

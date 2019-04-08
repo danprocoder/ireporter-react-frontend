@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Mapbox from '../Mapbox';
 import Image from '../widgets/Image';
-import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown.jsx';
-import Template from './Template.jsx';
+import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown';
+import Template from './Template';
 import ViewSingleIncidentSkeleton from '../skeletonscreens/ViewSingleIncident';
 import '../../../assets/css/view-record.css';
 
@@ -14,7 +14,9 @@ class ViewIncident extends Component {
   constructor(props) {
     super(props);
 
-    this.type = this.props.match.url.split('/')[2];
+    const { url } = props.match;
+
+    [, this.type] = url.split('/');
     this.state = {
       navTypeText: (this.type === 'red-flag' ? 'Red Flags' : 'Interventions'),
       incident: null,
@@ -42,7 +44,7 @@ class ViewIncident extends Component {
           incidentState: 'loaded',
         });
       })
-      .catch((error) => {
+      .catch(() => {
 
       });
   }
@@ -119,7 +121,7 @@ class ViewIncident extends Component {
                     Images
                   </div>
                   <div className="media-wrapper">
-                    {incident.Images.map((src, index) => <Image key={index} src={src} />)}
+                    {incident.Images.map(src => <Image key={src} src={src} />)}
                   </div>
                 </div>
                 )}

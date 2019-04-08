@@ -28,20 +28,23 @@ class TopNav extends Component {
       <div id="top" className="float-area">
         <div className="sitename f-left">
           <a href="index.html">
-            <h2>
-              <i className="fa fa-bullhorn" />
-              <span className="hide-responsive">iReporter</span>
-            </h2>
+            <i className="fa fa-bullhorn" />
+            {' '}
+            <span className="hide-responsive text">iReporter</span>
           </a>
         </div>
 
         <a href="#" className="f-left responsive-toggle"><i className="fa fa-bars" /></a>
 
         <ul className="navbar-menu f-right">
+          <li>
+            <a href="#"><i className="fa fa-bell" /></a>
+          </li>
           <li className="dropdown">
             <a href="#" onClick={() => this.toggleUserDropdownDisplay()}>
               {username}
-              <i className="fa fa-caret-down" />
+              {' '}
+              <i className="fa fa-angle-down" />
             </a>
             {showUserDropdown && (
             <div className="dropdown-menu">

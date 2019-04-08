@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import template from './templates/home.jsx';
+import { Component } from 'react';
+import template from './templates/home';
 import '../../assets/css/home.css';
 
 class Home extends Component {
