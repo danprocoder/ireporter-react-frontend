@@ -157,9 +157,14 @@ class Dashboard extends Component {
     );
   }
 
-  overview(header, stats) {
+  overview(header, stats, extraClassName = '') {
+    let className = 'widget overview';
+    if (extraClassName) {
+      className += ` ${extraClassName}`;
+    }
+
     return (
-      <div className="widget overview">
+      <div className={className}>
         <div className="top">
           <i className="fa fa-flag" />
           <div className="header">
@@ -221,7 +226,7 @@ class Dashboard extends Component {
 
             <div className="margin-top">
               {this.overview('Red Flags', redFlags)}
-              {this.overview('Interventions', interventions)}
+              {this.overview('Interventions', interventions, 'no-m-right')}
               <div className="clearfix" />
             </div>
 

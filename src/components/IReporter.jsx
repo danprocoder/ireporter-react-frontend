@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { appAction } from '../actiontypes/app';
 import { userActionCreator } from '../actions/users';
-import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
@@ -53,33 +52,30 @@ class IReporter extends Component {
 
     return (
       <BrowserRouter>
-        <div>
-          <Nav />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
 
-            <Route path="/dashboard" />
-            <Route path="/(red-flag|intervention)/new" />
-            <Route path="/(red-flag|intervention)s" />
-            <Route path="/(red-flag|intervention)/edit/:id" />
-            <Route path="/(red-flag|intervention)/:id" />
-            <Route path="/profile" />
+          <Route path="/dashboard" />
+          <Route path="/(red-flag|intervention)/new" />
+          <Route path="/(red-flag|intervention)s" />
+          <Route path="/(red-flag|intervention)/edit/:id" />
+          <Route path="/(red-flag|intervention)/:id" />
+          <Route path="/profile" />
 
-            {/* Admin routes. */}
-            <Route key="red-flags" path="/admin/red-flags" render={props => <AdminIncidents type="red-flag" {...props} />} />
-            <Route key="interventions" path="/admin/interventions" render={props => <AdminIncidents type="intervention" {...props} />} />
+          {/* Admin routes. */}
+          <Route key="red-flags" path="/admin/red-flags" render={props => <AdminIncidents type="red-flag" {...props} />} />
+          <Route key="interventions" path="/admin/interventions" render={props => <AdminIncidents type="intervention" {...props} />} />
 
-            <Route key="view-red-flag" path="/admin/red-flag/:id" component={AdminViewIncident} />
-            <Route key="view-intervention" path="/admin/intervention/:id" component={AdminViewIncident} />
+          <Route key="view-red-flag" path="/admin/red-flag/:id" component={AdminViewIncident} />
+          <Route key="view-intervention" path="/admin/intervention/:id" component={AdminViewIncident} />
 
-            <Route path="/admin/users" component={AdminUsers} />
-            <Route exact path="/admin" component={AdminDashboard} />
+          <Route path="/admin/users" component={AdminUsers} />
+          <Route exact path="/admin" component={AdminDashboard} />
 
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+          <Route component={NotFound} />
+        </Switch>
       </BrowserRouter>
     );
   }

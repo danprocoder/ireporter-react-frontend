@@ -6,7 +6,7 @@ export default () => (
   <div className="sidenav">
     <div className="sidenav-menus">
       <ul>
-        <SideNavMenuItem url="/admin" icon="dashboard" text="Dashboard" />
+        <SideNavMenuItem url="/admin" icon="tachometer-alt" text="Dashboard" />
         <SideNavMenuItem url="/admin/red-flags" icon="flag" text="Red Flags" />
         <SideNavMenuItem url="/admin/interventions" icon="question" text="Interventions" />
         <SideNavMenuItem url="/admin/users" icon="users" text="Users" />

@@ -22,6 +22,10 @@
 	position: relative;
 }
 
+.widget.overview.no-m-right {
+	margin-right: 0;
+}
+
 .widget.counter .fa {
 	position: absolute;
 	top: 20px;
