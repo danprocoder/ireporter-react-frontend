@@ -36,6 +36,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.1",
     "dotenv": "^7.0.0",
+    "enzyme": "^3.9.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
