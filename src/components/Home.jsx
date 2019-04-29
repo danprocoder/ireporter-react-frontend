@@ -8,7 +8,7 @@ import '../../assets/scss/home.scss';
 const Home = ({ isLoggedIn, user }) => (
   <div>
     <DefaultNav />
-    {template(isLoggedIn, user.isAdmin, user ? user.firstname : null)}
+    {template(isLoggedIn, user ? user.isAdmin : false, user ? user.firstname : null)}
   </div>
 );
 
