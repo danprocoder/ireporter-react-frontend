@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import Dropdown from './Dropdown.jsx';
+import Dropdown from './Dropdown';
 
 class IncidentStatusDropdown extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class IncidentStatusDropdown extends Component {
           working: false,
         });
       })
-      .catch((error) => {
+      .catch(() => {
         // Enable the dropdown.
         this.setState({ working: false });
       });

@@ -1,52 +1,71 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default (
-  <div>
-    <div>
-      <div className="bg-images-container">
-        <img src="../../assets/images/protest.jpeg" className="active" alt="img1" />
-        <img src="../../assets/images/bad-road.jpg" alt="img2" />
+export default (isLoggedIn, isAdmin, firstname) => (
+  <div className="home-section">
+    <div className="carousel">
+
+      <div className="carousel-images">
+        <div className="carousel-images-inner">
+          <img src="../../assets/images/protest.jpeg" className="active" alt="img1" />
+          <img src="../../assets/images/bad-road.jpg" alt="img2" />
+        </div>
       </div>
 
-      <div className="container">
-        <div className="welcome-text-container section t-center">
-          <div className="large-text">LET&apos;S MAKE NIGERIA A BETTER PLACE!</div>
-          <div className="info-text">Bring any form of corruption to the notice of appropriate authorities and the general public. Also report on things that needs government intervention.</div>
-          <div className="button-area"><a href="signup.html" className="reporter-signup-btn">Become a Reporter</a></div>
+      <div className="carousel-text">
+        <div className="container">
+          <div className="welcome-text-container section t-center">
+            <div className="large-text">WELCOME TO IREPORTER</div>
+            <div className="info-text">Bring any form of corruption to the notice of appropriate authorities and the general public. Also report on things that needs government intervention.</div>
+            <div className="button-area">
+              {isLoggedIn ? (
+                <Link to={isAdmin ? '/admin' : '/dashboard'} className="reporter-signup-btn">
+                  Continue as
+                  {' '}
+                  {firstname}
+                  {' '}
+                  &rarr;
+                </Link>
+              ) : (
+                <Link to="/signup" className="reporter-signup-btn">Become a Reporter</Link>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div className="section report">
       <div className="container">
+        <div className="section-header">Let&apos;s Make Nigeria a Better Place</div>
+        <div className="section-divider">
+          <i className="fa fa-bullhorn" />
+        </div>
         <div className="grid-container">
           <div className="grid-50">
             <h3 className="red-flag">
-              <i className="fa fa-bullhorn" />
-              {' '}
-              Report cases linked to
-              {' '}
-              <span>corruption</span>
+              Found any case linked to corruption
+              ?
             </h3>
 
             <div className="m-top">
               <div className="examples">Bribery, looted money, etc.</div>
-              <div className="button-area"><a href="login.html" className="button js-link-red-flag">Report!</a></div>
+              <div className="button-area">
+                <a href={isLoggedIn ? '/red-flag/new' : '/login'} className="button js-link-red-flag">Report!</a>
+              </div>
             </div>
 
           </div>
 
           <div className="grid-50">
             <h3 className="intervention">
-              <i className="fa fa-bullhorn" />
-              {' '}
-              Report things that need government
-              {' '}
-              <span>intervention</span>
+              Found any incident that needs government intervention?
             </h3>
             <div className="m-top">
               <div className="examples">Bad roads, electricity issues, etc.</div>
-              <div className="button-area"><a href="login.html" className="button js-link-intervention">Report!</a></div>
+              <div className="button-area">
+                <a href={isLoggedIn ? '/intervention/new' : '/login'} className="button js-link-intervention">Report!</a>
+              </div>
             </div>
           </div>
 
@@ -56,29 +75,16 @@ export default (
     </div>
 
     <footer>
-      <div className="container">
+      <div className="container clearfix">
         <div className="f-left">iReporter &copy; 2019</div>
 
         <div className="f-right m-top-768">
           <div className="footer-header">Follow Us</div>
           <div className="m-top">
-            <a href="#" className="social"><i className="fa fa-facebook" /></a>
-            <a href="#" className="social"><i className="fa fa-twitter" /></a>
+            <a href="#" className="social"><i className="fab fa-facebook" /></a>
+            <a href="#" className="social"><i className="fab fa-twitter" /></a>
           </div>
         </div>
-
-        <div className="f-right newsletter m-top-768">
-          <div className="footer-header">Subscribe to our newsletter</div>
-
-          <form action="#" className="m-top">
-            <div className="field-wrapper">
-              <input type="text" name="" placeholder="Your email address" className="text-field" />
-              <input type="submit" value="SUBSCRIBE" className="subscribe-btn" />
-            </div>
-          </form>
-        </div>
-
-        <div className="clearfix" />
       </div>
     </footer>
 

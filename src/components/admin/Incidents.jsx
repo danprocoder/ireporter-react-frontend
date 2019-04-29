@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Template from './Template';
 import TableRowLoading from '../skeletonscreens/TableRowLoading';
-import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown.jsx';
+import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown';
 import '../../../assets/css/tab.css';
 
 class Incident extends Component {
@@ -39,7 +39,7 @@ class Incident extends Component {
           incidentsState: 'loaded',
         });
       })
-      .catch((error) => {
+      .catch(() => {
 
       });
   }
@@ -93,7 +93,7 @@ class Incident extends Component {
                         <TableRowLoading cols={5} rows={3} />
                       ) : (
                         incidents.map((record, index) => (
-                          <tr>
+                          <tr key={index.toString()}>
                             <td>{index + 1}</td>
                             <td><Link to={`/admin/${type}/${record.id}`}>{record.title}</Link></td>
                             <td>{record.createdon}</td>
@@ -108,9 +108,9 @@ class Incident extends Component {
                 </div>
               </div>
 
-				    </div>
+            </div>
 
-          </div>	
+          </div>
 
         </div>
 

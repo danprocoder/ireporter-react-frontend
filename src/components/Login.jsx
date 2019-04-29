@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LoadingButton from './LoadingButton.jsx';
+import LoadingButton from './LoadingButton';
 import FormErrorText from './FormErrorText';
 import '../../assets/css/form.css';
 import '../../assets/css/user-form.css';

@@ -52,6 +52,12 @@ textarea {
 }
 
 /* Floats */
+.float-area::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .f-left {
     float: left;
 }

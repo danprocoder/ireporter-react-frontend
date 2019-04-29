@@ -1,0 +1,45 @@
+body {
+	background: #fafafa !important;
+}
+
+.admin {
+	.main-content {
+		margin-left: 210px;
+		padding-top: 60px;
+		position: relative;
+
+		.content {
+			padding: 20px 20px 30px 20px;
+
+			.navigation.header {
+				font-size: 17px;
+				font-weight: bold;
+			}
+
+			.p {
+				margin-top: 30px;
+			}
+		}
+	}
+}
+
+.search-box {
+	display: inline-block;
+}
+
+.table-wrapper {
+	display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12)
+}
+
+.table-wrapper th {
+	border-top: none;
+}
+
+table td .status {
+	cursor: pointer;
+}

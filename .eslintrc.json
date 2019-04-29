@@ -4,7 +4,9 @@
         "es6": true,
         "jest": true
     },
-    "extends": "airbnb",
+    "extends": [
+        "airbnb"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
@@ -17,12 +19,10 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "react/forbid-prop-types": "off",
         "jsx-a11y/anchor-is-valid": "off",
+        "class-methods-use-this": "off",
         "jsx-a11y/label-has-associated-control": [ "error", {
             "required": {
               "some": [ "nesting", "id"  ]

@@ -10,7 +10,7 @@ Object.keys(process.env).forEach((key) => {
 });
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve('dist'),
     filename: 'app.js',
@@ -49,4 +49,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin(envVariables),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };

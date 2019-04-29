@@ -1,0 +1,83 @@
+.admin {
+  #top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9999999999999;
+    background: #f54343;
+    height: 60px;
+    line-height: 60px;
+    padding-right: 20px;
+    box-shadow: 0 1px 12px #0000007d;
+
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .responsive-toggle {
+      display: none;
+    }
+
+    .sitename {
+      a {
+        width: 190px;
+        height: 60px;
+        line-height: 60px;
+        background: #de3838;
+        display: block;
+        color: yellow;
+        padding: 0 10px;
+        font-weight: bold;
+        font-size: 21px;
+
+        .text {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .responsive-toggle {
+      margin-left: 20px;
+    }
+
+    a {
+      color: #ffffff;
+    }
+
+    .navbar-menu {
+      display: flex;
+      justify-content: left;
+
+      & > li {
+        margin-left: 30px;
+      }
+
+      .dropdown-menu {
+        width: 180px;
+        padding: 5px 0;
+  
+        a {
+          line-height: 100%;
+        }
+      }
+    }
+  }
+
+  .fa-angle-down {
+    color: #ff9589;
+  }
+
+  @media screen and (max-width: 768px) {
+    #top {
+      .responsive-toggle {
+        display: block;
+      }
+
+      .hide-responsive {
+        display: none;
+      }
+    }
+  }
+}
