@@ -41,9 +41,13 @@ const DefaultNav = ({ isLoggedIn, user }) => (
   </div>
 );
 
+DefaultNav.defaultProps = {
+  user: null,
+};
+
 DefaultNav.propTypes = {
   isLoggedIn: boolProp.isRequired,
-  user: objectProp.isRequired,
+  user: objectProp,
 };
 
 const state2props = (state) => {

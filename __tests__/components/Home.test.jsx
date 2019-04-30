@@ -1,13 +1,27 @@
-import { render, cleanup } from 'react-testing-library';
+import React from 'react';
 import { createStore } from 'redux';
 import Provider from 'react-redux';
-import React from 'react';
+import { shallow } from 'enzyme';
 import Home from '../../src/components/Home';
 
-// afterEach(cleanup);
+let homeView;
 
-// describe('Test homepage component', () => {
-//   test('It should have certain texts', () => {
-    
-//   });
-// });
+beforeAll((done) => {
+  homeView = shallow(
+    <Provider store={createStore(() => 1)}>
+      <Home
+        isLoggedIn={false}
+        user={null}
+      />
+    </Provider>,
+  );
+
+  done();
+});
+
+describe('Test homepage component', () => {
+  test('It should have certain texts', (done) => {
+    expect(homeView.find('.welcome-text-container .large-text')).toBe('WELCOME TO IREPORTER');
+    done();
+  });
+});
