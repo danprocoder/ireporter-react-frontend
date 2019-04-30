@@ -77,8 +77,8 @@ class Dashboard extends Component {
 
         this.setState(newState);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        // Pass
       });
 
     // Get users location
@@ -122,9 +122,9 @@ class Dashboard extends Component {
       })
       .catch((error) => {
         if (error.response) {
-          console.error(error.response);
+          // Pass
         } else {
-          console.error('Failed to connect error');
+          // Pass
         }
       });
 

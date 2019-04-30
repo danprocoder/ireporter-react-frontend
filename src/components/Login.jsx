@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DefaultNav from './DefaultNav';
 import LoadingButton from './LoadingButton';
 import FormErrorText from './FormErrorText';
 import '../../assets/css/form.css';
-import '../../assets/css/user-form.css';
+import '../../assets/scss/user-form.scss';
 
 class Login extends Component {
   constructor() {
@@ -68,25 +69,30 @@ class Login extends Component {
     const { fieldError, isWorking } = this.state;
 
     return (
-      <div className="form-container">
-        <form className="login" id="login-form" onSubmit={e => e.preventDefault()}>
-          <div className="header-container">
-            <div className="header t-center">Log In</div>
+      <div>
+        <DefaultNav />
+        <div className="user-form-container">
+          <div className="form-container">
+            <form className="login" id="login-form" onSubmit={e => e.preventDefault()}>
+              <div className="header-container">
+                <div className="header t-center">Log In</div>
+              </div>
+              <div className="field-section">
+                <label htmlFor="email-field">Your Email</label>
+                <input type="text" id="email-field" name="email" className="text-field" onChange={this.onChange.bind(this)} />
+                <FormErrorText message={fieldError.email} />
+              </div>
+              <div className="field-section">
+                <label htmlFor="password-field">Your Password</label>
+                <input type="password" id="password-field" name="password" className="text-field" onChange={this.onChange.bind(this)} />
+                <FormErrorText message={fieldError.password} />
+              </div>
+              <div className="field-section t-center button-section">
+                <LoadingButton loading={isWorking} value="Log In" onClick={() => this.authenticateUser()} />
+              </div>
+            </form>
           </div>
-          <div className="field-section">
-            <label htmlFor="email-field">Your Email</label>
-            <input type="text" id="email-field" name="email" className="text-field" onChange={this.onChange.bind(this)} />
-            <FormErrorText message={fieldError.email} />
-          </div>
-          <div className="field-section">
-            <label htmlFor="password-field">Your Password</label>
-            <input type="password" id="password-field" name="password" className="text-field" onChange={this.onChange.bind(this)} />
-            <FormErrorText message={fieldError.password} />
-          </div>
-          <div className="field-section t-center button-section">
-            <LoadingButton loading={isWorking} value="Log In" onClick={() => this.authenticateUser()} />
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

@@ -5,8 +5,12 @@ const FormErrorText = ({ message }) => (
   message ? <div className="error">{message}</div> : null
 );
 
+FormErrorText.defaultProps = {
+  message: null,
+};
+
 FormErrorText.propTypes = {
-  message: stringProp.isRequired,
+  message: stringProp,
 };
 
 export default FormErrorText;

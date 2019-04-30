@@ -106,12 +106,6 @@
 	}
 }
 
-@media screen and (max-width: 500px) {
-	.overview .body .c {
-		/*display: block;*/
-	}
-}
-
 .overview .body .c .label {
 	font-size: 10px;
 	margin-top: 6px;
