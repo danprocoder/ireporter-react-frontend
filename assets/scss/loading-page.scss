@@ -1,0 +1,71 @@
+@import '../scss/variables.scss';
+
+@keyframes circle-anim {
+    0% {
+        background: #dddddd;
+    }
+
+    50% {
+        background: #aaaaaa;
+    }
+
+    100% {
+        background: #dddddd;
+    }
+}
+
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+
+    div {
+        display: inline-block;
+    }
+
+    .center {
+        display: inline-block;
+        text-align: center;
+
+        .fa {
+            color: $green-bg;
+        }
+
+        .circle-container {
+            margin-top: 8px;
+
+            .circle {
+                display: inline-block;
+                width: 7px;
+                height: 7px;
+                background: #dddddd;
+                border-radius: 50%;
+                margin-right: 8px;
+
+                &-1, &-2, &-3, &-4 {
+                    animation-name: circle-anim;
+                    animation-duration: 1s;
+                    animation-iteration-count: infinite;
+                }
+
+                &-2 {
+                    animation-delay: 1s;
+                }
+
+                &-3 {
+                    animation-delay: 2s;
+                }
+
+                &-4 {
+                    animation-delay: 3s;
+                }
+            }
+        }
+    }
+}

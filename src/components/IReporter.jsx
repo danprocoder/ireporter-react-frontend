@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { appAction } from '../actiontypes/app';
 import { userActionCreator } from '../actions/users';
-import Home from './Home';
+import HomeView from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import AdminDashboard from './admin/Dashboard';
@@ -14,7 +14,9 @@ import AdminIncidents from './admin/Incidents';
 import AdminViewIncident from './admin/ViewIncident';
 import UserLandingPage from './user/LandingPage';
 import UserCreateIncident from './user/CreateIncident';
+import UserViewIncidentList from './user/ViewIncidentList';
 import NotFound from './NotFound';
+import '../../assets/scss/loading-page.scss';
 import '../../assets/css/app.css';
 
 class IReporter extends Component {
@@ -45,9 +47,19 @@ class IReporter extends Component {
 
     if (appState !== 'ready') {
       return (
-        <div>
-          <h1>iReporter</h1>
-          <div>Loading....</div>
+        <div className="loading-page">
+          <div className="center">
+            <div className="icon">
+              <i className="fa fa-bullhorn fa-2x" />
+            </div>
+            <br />
+            <div className="circle-container">
+              <span className="circle circle-1" />
+              <span className="circle circle-2" />
+              <span className="circle circle-3" />
+              <span className="circle circle-4" />
+            </div>
+          </div>
         </div>
       );
     }
@@ -55,7 +67,7 @@ class IReporter extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={HomeView} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
 
@@ -64,7 +76,9 @@ class IReporter extends Component {
           <Route key="new-red-flag" path="/red-flag/new" render={props => <UserCreateIncident incidentType="red-flag" {...props} />} />
           <Route key="new-intervention" path="/intervention/new" render={props => <UserCreateIncident incidentType="intervention" {...props} />} />
 
-          <Route path="/(red-flag|intervention)s" />
+          <Route key="user-red-flags" path="/red-flags" component={UserViewIncidentList} />
+          <Route key="user-interventions" path="/interventions" component={UserViewIncidentList} />
+
           <Route path="/(red-flag|intervention)/edit/:id" />
           <Route path="/(red-flag|intervention)/:id" />
           <Route path="/profile" />

@@ -1,0 +1,58 @@
+.user-incidents {
+    .search-box {
+        display: inline-block;
+        position: relative;
+        width: 200px;
+        margin-left: 10px;
+    }
+    
+    .search-box .text-field {
+        padding: 9px;
+    }
+    
+    .search-box button {
+        position: absolute;
+        right: 7px;
+        top: 9px;
+        background: none;
+        border: none;
+        outline: none;
+    }
+    
+    .tab {
+        margin-top: 10px;
+    }
+    
+    .pagination-wrapper {
+        margin-top: 35px;
+    }
+    
+    .filter-container {
+        margin-top: 30px;
+    }
+    
+    #incidents {
+        margin-top: 20px;
+    }
+    
+    @media screen and (max-width:768px) {
+        .filter-container .f-left,
+        .filter-container .f-right {
+            float: none;
+        }
+    
+        .filter-container .search-box {
+            width: 100%;
+            margin: 0;
+        }
+    
+        #incidents {
+            margin-top: 40px;
+        }
+    
+        .filter-container .tab {
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
+}
