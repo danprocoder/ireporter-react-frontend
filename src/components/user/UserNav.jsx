@@ -1,21 +1,22 @@
 import React from 'react';
 import { string as stringProp } from 'prop-types';
 import { connect } from 'react-redux';
-import '../../assets/css/user-nav.css';
+import { Link } from 'react-router-dom';
+import '../../../assets/scss/user/user-nav.scss';
 
 const UserNav = ({ username }) => (
-  <div className="user red-bg">
+  <div className="user-nav red-bg">
     <div id="navbar">
-      <div className="container">
-        <a href="dashboard.html" className="sitename">
+      <div className="container clearfix">
+        <Link to="/dashboard" className="sitename f-left">
           <i className="fa fa-bullhorn" />
           {' '}
           iReporter
-        </a>
-        <div className="navbar-menu">
+        </Link>
+        <div className="navbar-menu f-right">
           <ul>
-            <li><a href="red-flags.html">Red Flags</a></li>
-            <li><a href="interventions.html">Interventions</a></li>
+            <li><Link to="/red-flags">Red Flags</Link></li>
+            <li><Link to="/interventions">Interventions</Link></li>
             <li className="dropdown">
               <a href="#">
                 {username}
@@ -23,14 +24,13 @@ const UserNav = ({ username }) => (
                 <i className="fa fa-angle-down" />
               </a>
               <ul className="dropdown-menu">
-                <li><a href="profile.html">My Profile</a></li>
+                <li><Link to="/profile">My Profile</Link></li>
                 <li><a href="#" className="auth-logout">Log out</a></li>
               </ul>
             </li>
           </ul>
         </div>
-        <button className="nav-toggle-responsive" type="button"><i className="fa fa-bars" /></button>
-        <div className="clearfix" />
+        <button className="nav-toggle-responsive f-right" type="button"><i className="fa fa-bars" /></button>
       </div>
     </div>
   </div>
@@ -40,4 +40,8 @@ UserNav.propTypes = {
   username: stringProp.isRequired,
 };
 
-export default connect()(UserNav);
+const state2props = state => ({
+  username: state.usersReducer.user.data.username,
+});
+
+export default connect(state2props)(UserNav);

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LoadingButton = ({ onClick, loading, value }) => {
+const LoadingButton = ({
+  onClick, loading, value, disabled,
+}) => {
   const props = {};
   // Click listener
   if (onClick) {
@@ -9,7 +11,7 @@ const LoadingButton = ({ onClick, loading, value }) => {
   }
   // Disabled button is loading is true so that one click won't be triggered when
   // a process is loading.
-  props.disabled = loading || false;
+  props.disabled = loading || disabled;
 
   return (
     <button type="button" className="button" {...props}>
@@ -22,11 +24,13 @@ const LoadingButton = ({ onClick, loading, value }) => {
 LoadingButton.defaultProps = {
   loading: false,
   onClick: null,
+  disabled: false,
 };
 
 LoadingButton.propTypes = {
   onClick: PropTypes.func,
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
   value: PropTypes.string.isRequired,
 };
 

@@ -5,7 +5,7 @@ import DefaultNav from './DefaultNav';
 import template from './templates/home';
 import '../../assets/scss/home.scss';
 
-const Home = ({ isLoggedIn, user }) => (
+export const Home = ({ isLoggedIn, user }) => (
   <div>
     <DefaultNav />
     {template(isLoggedIn, user ? user.isAdmin : false, user ? user.firstname : null)}

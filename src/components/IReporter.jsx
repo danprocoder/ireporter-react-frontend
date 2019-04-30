@@ -12,6 +12,8 @@ import AdminDashboard from './admin/Dashboard';
 import AdminUsers from './admin/Users';
 import AdminIncidents from './admin/Incidents';
 import AdminViewIncident from './admin/ViewIncident';
+import UserLandingPage from './user/LandingPage';
+import UserCreateIncident from './user/CreateIncident';
 import NotFound from './NotFound';
 import '../../assets/css/app.css';
 
@@ -57,8 +59,11 @@ class IReporter extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
 
-          <Route path="/dashboard" />
-          <Route path="/(red-flag|intervention)/new" />
+          <Route path="/dashboard" component={UserLandingPage} />
+
+          <Route key="new-red-flag" path="/red-flag/new" render={props => <UserCreateIncident incidentType="red-flag" {...props} />} />
+          <Route key="new-intervention" path="/intervention/new" render={props => <UserCreateIncident incidentType="intervention" {...props} />} />
+
           <Route path="/(red-flag|intervention)s" />
           <Route path="/(red-flag|intervention)/edit/:id" />
           <Route path="/(red-flag|intervention)/:id" />

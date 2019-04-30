@@ -3,11 +3,11 @@ import { userAction } from '../actiontypes/users';
 const initialState = {
   user: {
     authToken: null,
-    data: null
-  }
+    data: null,
+  },
 };
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
   const newState = { ...state };
   switch (action.type) {
     case userAction.LOG_IN:
@@ -16,6 +16,8 @@ export default (state=initialState, action) => {
     case userAction.LOGOUT:
       newState.user = null;
       break;
+    default:
+      return newState;
   }
   return newState;
 };

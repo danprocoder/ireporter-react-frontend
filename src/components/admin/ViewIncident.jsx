@@ -16,7 +16,7 @@ class ViewIncident extends Component {
 
     const { url } = props.match;
 
-    [, this.type] = url.split('/');
+    [,, this.type] = url.split('/');
     this.state = {
       navTypeText: (this.type === 'red-flag' ? 'Red Flags' : 'Interventions'),
       incident: null,
@@ -115,11 +115,6 @@ class ViewIncident extends Component {
 
                 {incident.Images.length > 0 && (
                 <div className="media-section images">
-                  <div className="section-header">
-                    <i className="fa fa-image" />
-                    {' '}
-                    Images
-                  </div>
                   <div className="media-wrapper">
                     {incident.Images.map(src => <Image key={src} src={src} />)}
                   </div>
