@@ -124,7 +124,7 @@ class ViewIncident extends Component {
 
             </div>
           ) : (
-            <ViewSingleIncidentSkeleton incidentsUrlPath={`${this.type}s`} navTypeText={navTypeText} />
+            <ViewSingleIncidentSkeleton incidentsUrlPath={`/admin/${this.type}s`} navTypeText={navTypeText} />
           )}
         </div>
       </Template>

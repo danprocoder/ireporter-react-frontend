@@ -7,7 +7,7 @@ import '../../../assets/scss/skeletonscreens/view-record.scss';
 const ViewSingleIncident = ({ incidentsUrlPath, navTypeText }) => (
   <div className="skeleton-screen-view-record">
     <div className="navigation">
-      <Link to={`/admin/${incidentsUrlPath}`}>{navTypeText}</Link>
+      <Link to={incidentsUrlPath}>{navTypeText}</Link>
       {' '}
       /
       {' '}
