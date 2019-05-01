@@ -171,7 +171,7 @@ class ViewIncidentList extends Component {
                           <td>{incident.createdon}</td>
                           <td>{this.incidentStatusView(incident.status)}</td>
                           <td className="actions">
-                            <Link to="/">
+                            <Link to={`/${incident.type}/edit/${incident.id}`}>
                               <i className="fa fa-pencil-alt" />
                               {' '}
                               Edit
