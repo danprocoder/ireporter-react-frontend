@@ -1,20 +1,21 @@
-import { userAction } from '../actiontypes/users';
-import axios from 'axios';
+import userAction from '../actiontypes/users';
 
-export const userActionCreator = {
+export default {
   logUserIn(token, data) {
     return {
       type: userAction.LOG_IN,
       payload: {
         authToken: token,
-        data
-      }
+        data,
+      },
     };
   },
 
   logUserOut() {
+    window.localStorage.removeItem('authToken');
+
     return {
-      type: userAction.LOGOUT
+      type: userAction.LOGOUT,
     };
-  }
+  },
 };

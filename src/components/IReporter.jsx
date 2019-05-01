@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { appAction } from '../actiontypes/app';
-import { userActionCreator } from '../actions/users';
+import userActionCreator from '../actions/users';
 import HomeView from './Home';
 import Login from './Login';
 import Signup from './Signup';
