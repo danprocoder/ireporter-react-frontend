@@ -17,6 +17,7 @@ import UserCreateIncident from './user/CreateIncident';
 import UserViewIncidentList from './user/ViewIncidentList';
 import UserViewIncident from './user/ViewIncident';
 import UserProfilePage from './user/UserProfile';
+import UserEditIncident from './user/EditIncident';
 import NotFound from './NotFound';
 import '../../assets/scss/loading-page.scss';
 import '../../assets/css/app.css';
@@ -81,7 +82,8 @@ class IReporter extends Component {
           <Route key="user-red-flags" path="/red-flags" component={UserViewIncidentList} />
           <Route key="user-interventions" path="/interventions" component={UserViewIncidentList} />
 
-          <Route path="/(red-flag|intervention)/edit/:id" />
+          <Route key="user-edit-red-flag" path="/red-flag/edit/:id" component={props => <UserEditIncident incidentType="red-flag" {...props} />} />
+          <Route key="user-edit-intervention" path="/intervention/edit/:id" component={props => <UserEditIncident incidentType="intervention" {...props} />} />
 
           <Route key="user-red-flag" path="/red-flag/:id" component={UserViewIncident} />
           <Route key="user-intervention" path="/intervention/:id" component={UserViewIncident} />
