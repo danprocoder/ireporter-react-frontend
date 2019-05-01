@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { object as objectProp, string as stringProp } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { get as axiosGet } from 'axios';
+import { get as axiosGet, delete as axiosDelete } from 'axios';
 import Template from './Template';
 import TableRowLoadingSkeletonScreen from '../skeletonscreens/TableRowLoading';
 import '../../../assets/scss/user/view-records.scss';
@@ -14,6 +14,8 @@ class ViewIncidentList extends Component {
     this.state = {
       incidents: [],
       incidentsLoadingState: 'loading',
+      incidentToDeleteIndex: -1,
+      isDeleting: false,
     };
 
     [, this.type] = props.match.url.split('/');
@@ -43,6 +45,50 @@ class ViewIncidentList extends Component {
       });
   }
 
+  cancelDelete() {
+    this.setState({
+      incidentToDeleteIndex: -1,
+    });
+  }
+
+  startDelete(index) {
+    this.setState({
+      incidentToDeleteIndex: index,
+    });
+  }
+
+  deleteIncident() {
+    this.setState({ isDeleting: true });
+
+    const { incidentToDeleteIndex, incidents } = this.state;
+
+    const { authToken } = this.props;
+
+    const incident = incidents[incidentToDeleteIndex];
+
+    axiosDelete(`${incident.type}s/${incident.id}`, {
+      baseURL: API_HOST,
+      headers: {
+        'x-access-token': authToken,
+      },
+    })
+      .then(() => {
+        incidents.splice(incidentToDeleteIndex, 1);
+
+        this.setState({
+          incidentToDeleteIndex: -1,
+          incidents,
+          isDeleting: false,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          incidentToDeleteIndex: -1,
+          isDeleting: false,
+        });
+      });
+  }
+
   incidentStatusView(status) {
     return (
       <span>
@@ -57,7 +103,12 @@ class ViewIncidentList extends Component {
   }
 
   render() {
-    const { incidents, incidentsLoadingState } = this.state;
+    const {
+      incidents,
+      incidentsLoadingState,
+      incidentToDeleteIndex,
+      isDeleting,
+    } = this.state;
 
     return (
       <Template>
@@ -125,11 +176,18 @@ class ViewIncidentList extends Component {
                               {' '}
                               Edit
                             </Link>
-                            <Link to="/">
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                this.startDelete(index);
+                                e.preventDefault();
+                              }}
+                              className="delete-action"
+                            >
                               <i className="fa fa-trash" />
                               {' '}
                               Delete
-                            </Link>
+                            </a>
                           </td>
                         </tr>
                       ))
@@ -140,6 +198,36 @@ class ViewIncidentList extends Component {
             </div>
           </div>
         </div>
+        {incidentToDeleteIndex !== -1 && (
+          <div className="modal-container">
+            <div className="modal medium" id="delete-modal">
+              <div className="modal-body">Do you want to delete this incident?</div>
+              <div className="modal-btn-area clearfix">
+                <a
+                  href="#"
+                  className="modal-btn close"
+                  onClick={(e) => {
+                    this.cancelDelete();
+                    e.preventDefault();
+                  }}
+                >
+                  Close
+                </a>
+                <a
+                  href="#"
+                  className="modal-btn red yes"
+                  onClick={(e) => {
+                    this.deleteIncident();
+                    e.preventDefault();
+                  }}
+                  disabled={isDeleting}
+                >
+                  Yes
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </Template>
     );
   }
