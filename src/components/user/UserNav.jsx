@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { string as stringProp } from 'prop-types';
+import { string as stringProp, object as objectProp, func as funcProp } from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import userActionCreator from '../../actions/users';
 import '../../../assets/scss/user/user-nav.scss';
 
 class UserNav extends Component {
@@ -11,6 +13,22 @@ class UserNav extends Component {
     this.state = {
       showUserDropdown: false,
     };
+  }
+
+  onLogoutClicked(e) {
+    const { logout, history } = this.props;
+
+    logout();
+    history.push('/');
+
+    e.preventDefault();
+  }
+
+  toggleUserDropdown(e) {
+    const { showUserDropdown } = this.state;
+    this.setState({ showUserDropdown: !showUserDropdown });
+
+    e.preventDefault();
   }
 
   render() {
@@ -32,7 +50,7 @@ class UserNav extends Component {
                 <li><Link to="/red-flags">Red Flags</Link></li>
                 <li><Link to="/interventions">Interventions</Link></li>
                 <li className="dropdown">
-                  <a href="#">
+                  <a href="#" onClick={e => this.toggleUserDropdown(e)}>
                     {username}
                     {' '}
                     <i className="fa fa-angle-down" />
@@ -40,7 +58,7 @@ class UserNav extends Component {
                   {showUserDropdown && (
                   <ul className="dropdown-menu">
                     <li><Link to="/profile">My Profile</Link></li>
-                    <li><a href="#" className="auth-logout">Log out</a></li>
+                    <li><a href="#" className="auth-logout" onClick={e => this.onLogoutClicked(e)}>Log out</a></li>
                   </ul>
                   )}
                 </li>
@@ -56,10 +74,16 @@ class UserNav extends Component {
 
 UserNav.propTypes = {
   username: stringProp.isRequired,
+  logout: funcProp.isRequired,
+  history: objectProp.isRequired,
 };
+
+const dispatch2props = dispatch => bindActionCreators({
+  logout: userActionCreator.logUserOut,
+}, dispatch);
 
 const state2props = state => ({
   username: state.usersReducer.user.data.username,
 });
 
-export default connect(state2props)(UserNav);
+export default withRouter(connect(state2props, dispatch2props)(UserNav));

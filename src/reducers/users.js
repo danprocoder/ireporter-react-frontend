@@ -1,4 +1,4 @@
-import { userAction } from '../actiontypes/users';
+import userAction from '../actiontypes/users';
 
 const initialState = {
   user: {
@@ -14,7 +14,10 @@ export default (state = initialState, action) => {
       newState.user = action.payload;
       break;
     case userAction.LOGOUT:
-      newState.user = null;
+      newState.user = {
+        authToken: null,
+        data: null,
+      };
       break;
     default:
       return newState;
