@@ -24,5 +24,5 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 Run `npm test` to run the test files.
 
 ## About this Project
-Frontend: https://http://daniel-ireporter-client.herokuapp.com
+Frontend: https://daniel-ireporter-client.herokuapp.com
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/2312708
