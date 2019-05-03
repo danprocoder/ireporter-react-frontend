@@ -78,6 +78,36 @@
       .hide-responsive {
         display: none;
       }
+
+      .sitename a {
+        width: 30px;
+        text-align: center;
+      }
+    }
+  
+    .sidenav {
+      width: 50px;
+    }
+  
+    .sidenav .sidenav-menus .text-wrapper {
+      display: none;
+    }
+
+    .main-content {
+      margin-left: 50px!important;
+    }
+
+    .sidenav.expanded {
+      width: 210px;
+      box-shadow: 1px 0 15px #e0e0e0;
+    }
+
+    .sidenav a {
+      overflow: hidden;
+    }
+
+    .sidenav.expanded .text-wrapper {
+      display: inline;
     }
   }
 }

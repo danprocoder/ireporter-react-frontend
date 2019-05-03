@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import DefaultNav from './DefaultNav';
 import LoadingButton from './LoadingButton';
 import FormErrorText from './FormErrorText';
@@ -57,7 +59,7 @@ class Login extends Component {
           if (typeof error.response.data.error === 'object') {
             newState.fieldError = error.response.data.error;
           } else {
-            // Snackbar goes here.
+            toast.error('Incorrect email/password');
           }
         }
 

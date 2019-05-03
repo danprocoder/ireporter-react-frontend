@@ -3,6 +3,7 @@ import { func as funcProps, string as stringProps } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { ToastContainer, Bounce } from 'react-toastify';
 import { appAction } from '../actiontypes/app';
 import userActionCreator from '../actions/users';
 import HomeView from './Home';
@@ -102,6 +103,14 @@ class IReporter extends Component {
 
           <Route component={NotFound} />
         </Switch>
+        <ToastContainer
+          pauseOnFocusLoss={false}
+          transition={Bounce}
+          className="toast-container"
+          toastClassName="default-toast"
+          autoClose={4000}
+          position="top-right"
+        />
       </BrowserRouter>
     );
   }

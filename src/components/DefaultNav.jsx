@@ -34,7 +34,12 @@ const DefaultNav = ({ isLoggedIn, user }) => (
               </ul>
             )}
           </div>
-          <button type="button" className="f-right nav-toggle-responsive"><i className="fa fa-bars" /></button>
+          <button
+            type="button"
+            className="f-right nav-toggle-responsive"
+          >
+            <i className="fa fa-bars" />
+          </button>
         </div>
       </div>
     </div>

@@ -15,6 +15,12 @@ class UserNav extends Component {
     };
   }
 
+  componentDidMount() {
+    window.matchMedia('(min-width: 769px)').addListener(() => {
+      this.navBar.classList.remove('shown');
+    });
+  }
+
   onLogoutClicked(e) {
     const { logout, history } = this.props;
 
@@ -31,6 +37,15 @@ class UserNav extends Component {
     e.preventDefault();
   }
 
+  toggleNavMobile() {
+    const { classList } = this.navBar;
+    if (classList.contains('shown')) {
+      classList.remove('shown');
+    } else {
+      classList.add('shown');
+    }
+  }
+
   render() {
     const { username } = this.props;
 
@@ -45,7 +60,7 @@ class UserNav extends Component {
               {' '}
               iReporter
             </Link>
-            <div className="navbar-menu f-right">
+            <div className="navbar-menu f-right" ref={(ref) => { this.navBar = ref; }}>
               <ul>
                 <li><Link to="/red-flags">Red Flags</Link></li>
                 <li><Link to="/interventions">Interventions</Link></li>
@@ -64,7 +79,13 @@ class UserNav extends Component {
                 </li>
               </ul>
             </div>
-            <button className="nav-toggle-responsive f-right" type="button"><i className="fa fa-bars" /></button>
+            <button
+              className="nav-toggle-responsive f-right"
+              type="button"
+              onClick={() => this.toggleNavMobile()}
+            >
+              <i className="fa fa-bars" />
+            </button>
           </div>
         </div>
       </div>
