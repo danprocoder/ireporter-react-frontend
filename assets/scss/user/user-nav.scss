@@ -52,6 +52,36 @@
 	}
 	
 	#navbar .nav-toggle-responsive {
-		margin-top: 12px;
+		line-height: 60px;
+		display: none;
+		color: #ffffff;
+		background: none;
+		border: none;
+		outline: none;
+		font-size: 20px;
+	}
+
+	@media screen and (max-width: 768px) {
+		#navbar .nav-toggle-responsive {
+			display: block;
+		}
+
+		#navbar {
+			position: relative;
+		}
+
+		#navbar .navbar-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			z-index: 9999999999999999;
+			background: black;
+
+			&.shown {
+				display: block;
+			}
+		}
 	}
 }

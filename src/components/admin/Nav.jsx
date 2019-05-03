@@ -31,6 +31,10 @@ class TopNav extends Component {
     });
   }
 
+  toggleSideNavMobile() {
+    document.querySelector('.sidenav').classList.toggle('expanded');
+  }
+
   render() {
     const { username } = this.props;
 
@@ -46,7 +50,16 @@ class TopNav extends Component {
           </a>
         </div>
 
-        <a href="#" className="f-left responsive-toggle"><i className="fa fa-bars" /></a>
+        <a
+          href="#"
+          className="f-left responsive-toggle"
+          onClick={(e) => {
+            this.toggleSideNavMobile();
+            e.preventDefault();
+          }}
+        >
+          <i className="fa fa-bars" />
+        </a>
 
         <ul className="navbar-menu f-right">
           <li>

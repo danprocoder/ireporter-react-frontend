@@ -85,12 +85,11 @@ class Incident extends Component {
                         <th>Title</th>
                         <th>Created At</th>
                         <th>Status</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {incidentsState === 'fetching' ? (
-                        <TableRowLoading cols={5} rows={3} />
+                        <TableRowLoading cols={4} rows={3} />
                       ) : (
                         incidents.map((record, index) => (
                           <tr key={index.toString()}>
@@ -100,7 +99,6 @@ class Incident extends Component {
                             <td>
                               <IncidentStatusDropdown incident={record} />
                             </td>
-                            <td>Like</td>
                           </tr>
                         )))}
                     </tbody>
