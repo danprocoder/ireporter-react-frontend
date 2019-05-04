@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import userActionCreator from '../../actions/users';
 import '../../../assets/scss/admin/nav.scss';
 
-class TopNav extends Component {
+export class TopNav extends Component {
   constructor(props) {
     super(props);
 
@@ -67,7 +67,7 @@ class TopNav extends Component {
           </li>
           <li className="dropdown">
             <a href="#" onClick={() => this.toggleUserDropdownDisplay()}>
-              {username}
+              <span className="username">{username}</span>
               {' '}
               <i className="fa fa-angle-down" />
             </a>

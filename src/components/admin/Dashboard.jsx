@@ -6,7 +6,7 @@ import Mapbox from '../Mapbox';
 import Template from './Template';
 import '../../../assets/css/admin/dashboard.css';
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   constructor(props) {
     super(props);
 
