@@ -15,4 +15,7 @@ module.exports = {
       statements: 40,
     },
   },
+  globals: {
+    API_HOST: 'hostie',
+  },
 };
