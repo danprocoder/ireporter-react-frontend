@@ -25,6 +25,8 @@ export default (state = getInitialState(), action) => {
   let newState = { ...state };
   switch (action.type) {
     case userAction.LOG_IN:
+      newState.isLoggingIn = false;
+      newState.isCreatingUser = false;
       newState.user = action.payload;
       break;
     case userAction.LOGOUT:

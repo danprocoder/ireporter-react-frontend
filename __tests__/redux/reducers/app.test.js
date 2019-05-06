@@ -1,5 +1,5 @@
 import appReducer from '../../../src/reducers/app';
-import { appAction } from '../../../src/actiontypes/app';
+import appAction from '../../../src/actiontypes/app';
 
 let state;
 
