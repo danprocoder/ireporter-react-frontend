@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../assets/scss/default-nav.scss';
 
-export const DefaultNav = ({ isLoggedIn, user }) => (
+const DefaultNav = ({ isLoggedIn, user }) => (
   <div className="default-nav red-bg">
     <div id="navbar">
       <div className="navbar-container">
