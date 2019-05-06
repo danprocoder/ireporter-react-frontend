@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { func as funcProps, string as stringProps } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { ToastContainer, Bounce } from 'react-toastify';
-import { appAction } from '../actiontypes/app';
 import userActionCreator from '../actions/users';
 import HomeView from './Home';
 import Login from './Login';
@@ -25,25 +24,10 @@ import '../../assets/css/app.css';
 
 class IReporter extends Component {
   componentWillMount() {
-    const { dispatch } = this.props;
+    const { verifyToken } = this.props;
 
     const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      axios.get('auth', {
-        baseURL: API_HOST,
-        headers: {
-          'x-access-token': authToken,
-        },
-      })
-        .then((response) => {
-          dispatch(userActionCreator.logUserIn(authToken, response.data.data[0]));
-          dispatch({ type: appAction.READY });
-        })
-        .catch(() => {
-        });
-    } else {
-      dispatch({ type: appAction.READY });
-    }
+    verifyToken(authToken);
   }
 
   render() {
@@ -117,7 +101,7 @@ class IReporter extends Component {
 }
 
 IReporter.propTypes = {
-  dispatch: funcProps.isRequired,
+  verifyToken: funcProps.isRequired,
   appState: stringProps.isRequired,
 };
 
@@ -125,4 +109,8 @@ const state2Props = state => ({
   appState: state.appReducer.state,
 });
 
-export default connect(state2Props)(IReporter);
+const dispatch2props = dispatch => bindActionCreators({
+  verifyToken: userActionCreator.fetchUserDetails,
+}, dispatch);
+
+export default connect(state2Props, dispatch2props)(IReporter);
