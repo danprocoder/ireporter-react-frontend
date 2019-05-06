@@ -12,7 +12,7 @@ const DefaultNav = ({ isLoggedIn, user }) => (
           <Link to="/" className="sitename f-left">
             <i className="fa fa-bullhorn" />
             {' '}
-            iReporter
+            <span>iReporter</span>
           </Link>
           <div className="navbar-menu f-right">
             {!isLoggedIn ? (

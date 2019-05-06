@@ -1,3 +1,3 @@
-export const appAction = {
-  READY: 'app.ready'
+export default {
+  READY: 'app.ready',
 };

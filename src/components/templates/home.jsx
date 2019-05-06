@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import protestImg from '../../../assets/images/protest.jpeg';
+import badRoadPic from '../../../assets/images/bad-road.jpg';
 
 export default (isLoggedIn, isAdmin, firstname) => (
   <div className="home-section">
@@ -7,8 +9,8 @@ export default (isLoggedIn, isAdmin, firstname) => (
 
       <div className="carousel-images">
         <div className="carousel-images-inner">
-          <img src="../../assets/images/protest.jpeg" className="active" alt="img1" />
-          <img src="../../assets/images/bad-road.jpg" alt="img2" />
+          <img src={protestImg} className="active" alt="img1" />
+          <img src={badRoadPic} alt="img2" />
         </div>
       </div>
 

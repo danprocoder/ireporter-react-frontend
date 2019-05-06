@@ -61,6 +61,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "mapbox-gl": "^0.53.1",
+    "moxios": "^0.4.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
@@ -69,6 +70,7 @@
     "react-router-dom": "^5.0.0",
     "react-toastify": "^5.1.0",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
     "serve": "^11.0.0"
   },
