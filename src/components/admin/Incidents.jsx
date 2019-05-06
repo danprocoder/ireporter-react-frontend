@@ -12,6 +12,7 @@ import Template from './Template';
 import TableRowLoading from '../skeletonscreens/TableRowLoading';
 import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown';
 import { getAllIncidents } from '../../actions/incidents';
+import { dateFormat } from '../../helpers/datetime';
 import '../../../assets/css/tab.css';
 
 class Incident extends Component {
@@ -85,7 +86,7 @@ class Incident extends Component {
                           <tr key={index.toString()}>
                             <td>{index + 1}</td>
                             <td><Link to={`/admin/${type}/${record.id}`}>{record.title}</Link></td>
-                            <td>{record.createdon}</td>
+                            <td>{dateFormat(record.createdon)}</td>
                             <td>
                               <IncidentStatusDropdown incident={record} />
                             </td>
