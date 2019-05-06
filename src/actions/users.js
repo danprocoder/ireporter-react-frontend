@@ -67,8 +67,34 @@ export default {
     };
   },
 
-  createNewUser(fieldData) {
-    return dispatch => 1;
+  createNewUser(fieldValues) {
+    return (dispatch) => {
+      dispatch({ type: userAction.CREATING_USER });
+
+      axiosPost('auth/signup', fieldValues, {
+        baseURL: API_HOST,
+      })
+        .then(response => response.data.data[0])
+        .then(({ token, user }) => {
+          localStorage.setItem('authToken', token);
+
+          dispatch({
+            type: userAction.LOG_IN,
+            payload: {
+              authToken: token,
+              data: user,
+            },
+          });
+        })
+        .catch((error) => {
+          const action = { type: userAction.CREATE_USER_ERROR, payload: {} };
+          if (typeof error.response.data === 'object') {
+            action.payload.fieldErrors = error.response.data.error;
+          }
+
+          dispatch(action);
+        });
+    };
   },
 
   logUserOut() {
