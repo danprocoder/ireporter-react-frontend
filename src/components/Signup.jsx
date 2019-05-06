@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { post as axiosPost } from 'axios';
-import DefaultNav from './DefaultNav';
+import { func as funcProp, object as objectProp, bool as boolProp } from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import DefaultNavBar from './DefaultNav';
 import LoadingButton from './LoadingButton';
 import FormErrorText from './FormErrorText';
+import userAction from '../actions/users';
 import '../../assets/css/form.css';
 import '../../assets/scss/user-form.scss';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
+
+    const { isLoggedIn, user, history } = props;
+
+    if (isLoggedIn) {
+      history.push(user.isAdmin ? '/admin' : '/dashboard');
+    }
 
     this.state = {
       fieldValues: {
@@ -19,16 +28,15 @@ class Signup extends Component {
         phoneNumber: '',
         password: '',
       },
-      fieldErrors: {
-        firstname: '',
-        lastname: '',
-        username: '',
-        email: '',
-        phoneNumber: '',
-        password: '',
-      },
-      isWorking: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { isLoggedIn, user, history } = nextProps;
+
+    if (isLoggedIn) {
+      history.push(user.isAdmin ? '/admin' : '/dashboard');
+    }
   }
 
   onTextEntered({ target }) {
@@ -40,30 +48,11 @@ class Signup extends Component {
   }
 
   submitForm(event) {
+    const { signUp } = this.props;
+
     const { fieldValues } = this.state;
-    this.setState({
-      isWorking: true,
-    });
 
-    axiosPost('auth/signup', fieldValues, {
-      baseURL: API_HOST,
-    })
-      .then(response => response.data.data[0])
-      .then((data) => {
-        localStorage.setItem('authToken', data.token);
-
-        window.location = (data.user.isAdmin ? '/admin' : '/dashboard');
-      })
-      .catch((error) => {
-        const newState = { isWorking: false };
-        if (error.response) {
-          if (typeof error.response.data === 'object') {
-            newState.fieldErrors = error.response.data.error;
-          }
-        }
-
-        this.setState(newState);
-      });
+    signUp(fieldValues);
 
     if (event) {
       event.preventDefault();
@@ -71,11 +60,11 @@ class Signup extends Component {
   }
 
   render() {
-    const { isWorking, fieldErrors } = this.state;
+    const { fieldErrors, isCreatingUser } = this.props;
 
     return (
       <div>
-        <DefaultNav />
+        <DefaultNavBar />
         <div className="user-form-container">
           <div className="form-container">
             <form className="signup" id="signup-form" method="post">
@@ -123,7 +112,7 @@ class Signup extends Component {
                 </div>
                 <div className="field-section t-center button-section">
                   <LoadingButton
-                    loading={isWorking}
+                    loading={isCreatingUser}
                     value="Become a Reporter"
                     onClick={() => this.submitForm()}
                   />
@@ -137,4 +126,24 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+Signup.propTypes = {
+  signUp: funcProp.isRequired,
+  history: objectProp.isRequired,
+  isLoggedIn: boolProp.isRequired,
+  user: objectProp.isRequired,
+  isCreatingUser: boolProp.isRequired,
+  fieldErrors: objectProp.isRequired,
+};
+
+const state2props = ({ usersReducer }) => ({
+  isCreatingUser: usersReducer.isCreatingUser,
+  fieldErrors: usersReducer.signUpFieldErrors,
+  isLoggedIn: usersReducer.user.data != null,
+  user: usersReducer.user,
+});
+
+const dispatch2props = dispatch => bindActionCreators({
+  signUp: userAction.createNewUser,
+}, dispatch);
+
+export default connect(state2props, dispatch2props)(Signup);
