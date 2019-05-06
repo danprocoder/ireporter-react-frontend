@@ -12,6 +12,7 @@ import { delete as axiosDelete } from 'axios';
 import Template from './Template';
 import TableRowLoadingSkeletonScreen from '../skeletonscreens/TableRowLoading';
 import { getAllIncidents } from '../../actions/incidents';
+import { dateFormat } from '../../helpers/datetime';
 import '../../../assets/scss/user/view-records.scss';
 
 class ViewIncidentList extends Component {
@@ -156,7 +157,7 @@ class ViewIncidentList extends Component {
                               {incident.title}
                             </Link>
                           </td>
-                          <td>{incident.createdon}</td>
+                          <td>{dateFormat(incident.createdon)}</td>
                           <td>{this.incidentStatusView(incident.status)}</td>
                           <td className="actions">
                             <Link to={`/${incident.type}/edit/${incident.id}`}>

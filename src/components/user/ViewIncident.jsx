@@ -7,6 +7,7 @@ import Template from './Template';
 import Image from '../widgets/Image';
 import Mapbox from '../Mapbox';
 import ViewSingleIncidentSkeletonScreen from '../skeletonscreens/ViewSingleIncident';
+import { dateFormat } from '../../helpers/datetime';
 import '../../../assets/css/view-record.css';
 
 class ViewIncident extends Component {
@@ -84,7 +85,7 @@ class ViewIncident extends Component {
                   </div>
                   <div className="title">{incident.title}</div>
                   <div className="info-wrapper clearfix">
-                    <span className="info date">{incident.createdon}</span>
+                    <span className="info date">{dateFormat(incident.createdon)}</span>
 
                     {this.incidentHasLocation() && (
                     <span className="info map">
