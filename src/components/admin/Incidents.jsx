@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+import {
+  string as stringProp,
+  object as objectProp,
+  array as arrayProp,
+  func as funcProp,
+} from 'prop-types';
 import Template from './Template';
 import TableRowLoading from '../skeletonscreens/TableRowLoading';
 import IncidentStatusDropdown from '../widgets/IncidentStatusDropdown';
+import { getAllIncidents } from '../../actions/incidents';
 import '../../../assets/css/tab.css';
 
 class Incident extends Component {
@@ -15,8 +21,6 @@ class Incident extends Component {
     const { type } = props;
     this.state = {
       title: (type === 'red-flag' ? 'Red Flags' : 'Interventions'),
-      incidents: [],
-      incidentsState: 'fetching',
     };
   }
 
@@ -25,29 +29,15 @@ class Incident extends Component {
   }
 
   fetchIncidents() {
-    const { type, user } = this.props;
+    const { type, user, getIncidents } = this.props;
 
-    axios.get(`${type}s`, {
-      baseURL: API_HOST,
-      headers: {
-        'x-access-token': user.authToken,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          incidents: response.data.data,
-          incidentsState: 'loaded',
-        });
-      })
-      .catch(() => {
-
-      });
+    getIncidents(user.authToken, type);
   }
 
   render() {
-    const { title, incidents, incidentsState } = this.state;
+    const { title } = this.state;
 
-    const { type } = this.props;
+    const { incidents, incidentFetchState, type } = this.props;
 
     return (
       <Template>
@@ -88,7 +78,7 @@ class Incident extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {incidentsState === 'fetching' ? (
+                      {incidentFetchState === 'fetching' ? (
                         <TableRowLoading cols={4} rows={3} />
                       ) : (
                         incidents.map((record, index) => (
@@ -118,17 +108,26 @@ class Incident extends Component {
 }
 
 Incident.propTypes = {
-  user: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
+  user: objectProp.isRequired,
+  type: stringProp.isRequired,
+  getIncidents: funcProp.isRequired,
+  incidents: arrayProp.isRequired,
+  incidentFetchState: stringProp.isRequired,
 };
 
-const state2props = (state) => {
-  const reducer = state.usersReducer;
-  const { authToken } = reducer.user;
+const state2props = ({ usersReducer, incidentsReducer }) => {
+  const { authToken } = usersReducer.user;
   return {
     user: {
       authToken,
     },
+    incidents: incidentsReducer.incidents,
+    incidentFetchState: incidentsReducer.incidentFetchState,
   };
 };
-export default connect(state2props)(Incident);
+
+const dispatch2props = dispatch => bindActionCreators({
+  getIncidents: getAllIncidents,
+}, dispatch);
+
+export default connect(state2props, dispatch2props)(Incident);

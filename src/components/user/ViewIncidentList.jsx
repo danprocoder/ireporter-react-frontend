@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { object as objectProp, string as stringProp } from 'prop-types';
+import {
+  object as objectProp,
+  string as stringProp,
+  func as funcProp,
+  array as arrayProp,
+} from 'prop-types';
 import { Link } from 'react-router-dom';
-import { get as axiosGet, delete as axiosDelete } from 'axios';
+import { delete as axiosDelete } from 'axios';
 import Template from './Template';
 import TableRowLoadingSkeletonScreen from '../skeletonscreens/TableRowLoading';
+import { getAllIncidents } from '../../actions/incidents';
 import '../../../assets/scss/user/view-records.scss';
 
 class ViewIncidentList extends Component {
@@ -12,8 +19,6 @@ class ViewIncidentList extends Component {
     super(props);
 
     this.state = {
-      incidents: [],
-      incidentsLoadingState: 'loading',
       incidentToDeleteIndex: -1,
       isDeleting: false,
     };
@@ -23,26 +28,9 @@ class ViewIncidentList extends Component {
   }
 
   componentDidMount() {
-    const { authToken } = this.props;
+    const { authToken, getIncidents } = this.props;
 
-    axiosGet(`${this.type}s`, {
-      baseURL: API_HOST,
-      headers: {
-        'x-access-token': authToken,
-      },
-    })
-      .then(response => response.data.data)
-      .then((incidents) => {
-        this.setState({
-          incidents,
-          incidentsLoadingState: 'fetched',
-        });
-      })
-      .catch(() => {
-        this.setState({
-          incidentsLoadingState: 'error',
-        });
-      });
+    getIncidents(authToken, this.type);
   }
 
   cancelDelete() {
@@ -103,9 +91,9 @@ class ViewIncidentList extends Component {
   }
 
   render() {
+    const { incidentFetchState, incidents } = this.props;
+
     const {
-      incidents,
-      incidentsLoadingState,
       incidentToDeleteIndex,
       isDeleting,
     } = this.state;
@@ -157,7 +145,7 @@ class ViewIncidentList extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {incidentsLoadingState === 'loading' ? (
+                    {incidentFetchState === 'fetching' ? (
                       <TableRowLoadingSkeletonScreen rows={3} cols={5} />
                     ) : (
                       incidents.map((incident, index) => (
@@ -236,10 +224,19 @@ class ViewIncidentList extends Component {
 ViewIncidentList.propTypes = {
   match: objectProp.isRequired,
   authToken: stringProp.isRequired,
+  getIncidents: funcProp.isRequired,
+  incidents: arrayProp.isRequired,
+  incidentFetchState: stringProp.isRequired,
 };
 
 const state2props = state => ({
   authToken: state.usersReducer.user.authToken,
+  incidents: state.incidentsReducer.incidents,
+  incidentFetchState: state.incidentsReducer.incidentFetchState,
 });
 
-export default connect(state2props)(ViewIncidentList);
+const dispatch2props = dispatch => bindActionCreators({
+  getIncidents: getAllIncidents,
+}, dispatch);
+
+export default connect(state2props, dispatch2props)(ViewIncidentList);

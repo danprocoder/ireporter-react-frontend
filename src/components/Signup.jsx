@@ -16,7 +16,7 @@ class Signup extends Component {
     const { isLoggedIn, user, history } = props;
 
     if (isLoggedIn) {
-      history.push(user.isAdmin ? '/admin' : '/dashboard');
+      history.push(user.data.isAdmin ? '/admin' : '/dashboard');
     }
 
     this.state = {
@@ -35,7 +35,7 @@ class Signup extends Component {
     const { isLoggedIn, user, history } = nextProps;
 
     if (isLoggedIn) {
-      history.push(user.isAdmin ? '/admin' : '/dashboard');
+      history.push(user.data.isAdmin ? '/admin' : '/dashboard');
     }
   }
 

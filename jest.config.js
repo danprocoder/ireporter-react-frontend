@@ -1,8 +1,12 @@
 module.exports = {
   setupFiles: ['<rootDir>/enzyme.config.js'],
   moduleNameMapper: {
-    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+    '^.+\\.(jpeg|jpg|css|less|scss)$': 'identity-obj-proxy',
   },
+  roots: [
+    '<rootDir>',
+    '<rootDir>/src/components',
+  ],
   coverageThreshold: {
     global: {
       branches: 40,

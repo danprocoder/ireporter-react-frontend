@@ -1,18 +1,24 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { DefaultNav } from '../../src/components/DefaultNav';
+import DefaultNavConnected from '../../src/components/DefaultNav';
+import userAction from '../../src/actiontypes/users';
+import reducers from '../../src/reducers';
 
-let defaultNav;
+let connected;
+let store;
 
 beforeAll((done) => {
-  defaultNav = mount(
-    <BrowserRouter>
-      <DefaultNav
-        isLoggedIn={false}
-        user={null}
-      />
-    </BrowserRouter>,
+  store = createStore(reducers);
+
+  connected = mount(
+    <Provider store={store}>
+      <BrowserRouter>
+        <DefaultNavConnected />
+      </BrowserRouter>
+    </Provider>,
   );
 
   done();
@@ -20,26 +26,27 @@ beforeAll((done) => {
 
 describe('Test <DefaultNav /> component', () => {
   test('It should contain sitename', () => {
-    expect(defaultNav.find('.sitename span').text()).toBe('iReporter');
+    expect(connected.find('.sitename span').text()).toBe('iReporter');
   });
 
   test('It should have a login and sign up link if the user is not logged in', () => {
-    expect(defaultNav.find('.navbar-menu li Link').at(0).text()).toBe('Log In');
-    expect(defaultNav.find('.navbar-menu li Link').at(1).text()).toBe('Sign Up');
+    expect(connected.find('.navbar-menu li Link').at(0).text()).toBe('Log In');
+    expect(connected.find('.navbar-menu li Link').at(1).text()).toBe('Sign Up');
   });
 
   test('It should have a link to the user\'s dashboard if the user is logged in', () => {
-    defaultNav = mount(
-      <BrowserRouter>
-        <DefaultNav
-          isLoggedIn
-          user={{
-            isAdmin: false,
-            firstname: 'Whistleblower',
-          }}
-        />
-      </BrowserRouter>,
-    );
-    expect(defaultNav.find('.navbar-menu li Link').at(0).text()).toBe('Continue as Whistleblower →');
+    store.dispatch({
+      type: userAction.LOG_IN,
+      payload: {
+        authToken: 'token',
+        data: {
+          firstname: 'Whistleblower',
+          isAdmin: false,
+        },
+      },
+    });
+    connected.update();
+
+    expect(connected.find('.navbar-menu li Link').at(0).text()).toBe('Continue as Whistleblower →');
   });
 });
